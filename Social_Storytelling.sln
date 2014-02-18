@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Storytelling", "Social_Storytelling\Social_Storytelling.csproj", "{A183D0A9-6A41-44F0-925B-945D94286242}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Storytelling.Business", "Social_Storytelling.Business\Social_Storytelling.Business.csproj", "{D600105E-2617-4B79-94FB-FDDDE280AC52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Storytelling.Data", "Social_Storytelling.Data\Social_Storytelling.Data.csproj", "{2112BDCE-9D16-4B3C-B3DA-01798EEE5FDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{A183D0A9-6A41-44F0-925B-945D94286242}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A183D0A9-6A41-44F0-925B-945D94286242}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A183D0A9-6A41-44F0-925B-945D94286242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D600105E-2617-4B79-94FB-FDDDE280AC52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D600105E-2617-4B79-94FB-FDDDE280AC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D600105E-2617-4B79-94FB-FDDDE280AC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D600105E-2617-4B79-94FB-FDDDE280AC52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2112BDCE-9D16-4B3C-B3DA-01798EEE5FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2112BDCE-9D16-4B3C-B3DA-01798EEE5FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2112BDCE-9D16-4B3C-B3DA-01798EEE5FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2112BDCE-9D16-4B3C-B3DA-01798EEE5FDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

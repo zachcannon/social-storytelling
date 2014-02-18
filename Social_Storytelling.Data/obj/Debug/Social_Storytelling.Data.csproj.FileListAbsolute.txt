@@ -1,0 +1,4 @@
+C:\Users\mabney\Documents\GitHub\social-storytelling\Social_Storytelling.Data\bin\Debug\Social_Storytelling.Data.dll
+C:\Users\mabney\Documents\GitHub\social-storytelling\Social_Storytelling.Data\bin\Debug\Social_Storytelling.Data.pdb
+C:\Users\mabney\Documents\GitHub\social-storytelling\Social_Storytelling.Data\obj\Debug\Social_Storytelling.Data.dll
+C:\Users\mabney\Documents\GitHub\social-storytelling\Social_Storytelling.Data\obj\Debug\Social_Storytelling.Data.pdb
