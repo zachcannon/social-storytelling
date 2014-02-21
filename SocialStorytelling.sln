@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Storytelling", "Social_Storytelling\Social_Storytelling.csproj", "{A183D0A9-6A41-44F0-925B-945D94286242}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialStorytelling", "Social_Storytelling\SocialStorytelling.csproj", "{A183D0A9-6A41-44F0-925B-945D94286242}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Storytelling.Business", "Social_Storytelling.Business\Social_Storytelling.Business.csproj", "{D600105E-2617-4B79-94FB-FDDDE280AC52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialStorytelling.Business", "Social_Storytelling.Business\SocialStorytelling.Business.csproj", "{D600105E-2617-4B79-94FB-FDDDE280AC52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Storytelling.Data", "Social_Storytelling.Data\Social_Storytelling.Data.csproj", "{2112BDCE-9D16-4B3C-B3DA-01798EEE5FDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialStorytelling.Data", "Social_Storytelling.Data\SocialStorytelling.Data.csproj", "{2112BDCE-9D16-4B3C-B3DA-01798EEE5FDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Social_Storytelling.Startup))]
-namespace Social_Storytelling
+[assembly: OwinStartupAttribute(typeof(SocialStorytelling.Startup))]
+namespace SocialStorytelling
 {
     public partial class Startup
     {

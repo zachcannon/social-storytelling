@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Social_Storytelling.Business
+namespace SocialStorytelling.Business
 {
     public class Class1
     {

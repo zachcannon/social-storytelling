@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Social_Storytelling.Controllers
+namespace SocialStorytelling.Controllers
 {
     public class HomeController : Controller
     {
