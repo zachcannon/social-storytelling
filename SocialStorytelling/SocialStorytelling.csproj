@@ -213,11 +213,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Social_Storytelling.Business\SocialStorytelling.Business.csproj">
+    <ProjectReference Include="..\SocialStorytelling.Business\SocialStorytelling.Business.csproj">
       <Project>{d600105e-2617-4b79-94fb-fddde280ac52}</Project>
       <Name>SocialStorytelling.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Social_Storytelling.Data\SocialStorytelling.Data.csproj">
+    <ProjectReference Include="..\SocialStorytelling.Data\SocialStorytelling.Data.csproj">
       <Project>{2112bdce-9d16-4b3c-b3da-01798eee5fdf}</Project>
       <Name>SocialStorytelling.Data</Name>
     </ProjectReference>
