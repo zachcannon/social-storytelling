@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SocialStorytelling.Business;
 using SocialStorytelling.Data;
+using SocialStorytelling.Models;
 
 namespace SocialStorytelling.Controllers
 {
@@ -18,7 +19,8 @@ namespace SocialStorytelling.Controllers
 
         public ActionResult GetTheStory()
         {
-            return Json("Story goes here", JsonRequestBehavior.AllowGet);
+            StoryModel story = new StoryModel(1, "TestStory", "TestPrompt");
+            return Json(story, JsonRequestBehavior.AllowGet);
         }
 
     }

@@ -4,7 +4,9 @@ $(document).ready(function () {
     $(function () {
 
         var printStory = function (data) {
-            $('#storycontainer').append(data);
+            $('#storycontainer').append(data.Id);
+            $('#storycontainer').append(data.Title);
+            $('#storycontainer').append(data.Prompt);
         };
 
         $.ajax({
