@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using SocialStorytelling.Business;
 using SocialStorytelling.Data;
-using SocialStorytelling.Models;
 
 namespace SocialStorytelling.Controllers
 {
@@ -17,10 +16,11 @@ namespace SocialStorytelling.Controllers
             return View();
         }
 
-        public ActionResult GetTheStory()
+        public ActionResult GetStoryList()
         {
-            StoryModel story = new StoryModel(1, "TestStory", "TestPrompt");
-            return Json(story, JsonRequestBehavior.AllowGet);
+            ControllerBusiness controller = new ControllerBusiness();
+            List<Story> storybook = controller.GetStoryBook();
+            return Json(storybook, JsonRequestBehavior.AllowGet);
         }
 
     }
