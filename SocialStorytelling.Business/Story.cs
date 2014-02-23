@@ -11,8 +11,7 @@ namespace SocialStorytelling.Business
         public int Id { get; set; }
         public string Title { get; set; }
         public string Prompt { get; set; }
-        public List<Entry> StoryEntries { get; set; }       
-        public string DemographicInfo { get; set; }
+        public List<Entry> StoryEntries { get; set; }
 
         public Story(int storyId, string storyTitle, string prompt)
         {   

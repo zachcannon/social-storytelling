@@ -15,6 +15,7 @@ namespace SocialStorytelling.Business
         public List<Story> GetStoryBook()
         {
             ApplicationContext data = new ApplicationContext();
+
             List<StoryData> storyData = data.GetStories();
 
             List<Story> storyBook = new List<Story>();
@@ -26,19 +27,17 @@ namespace SocialStorytelling.Business
             return storyBook;
         }
 
-        public List<Story> RemoveStoryFromBook(int idToRemove)
+        public void RemoveStoryFromBook(int idToRemove)
         {
             ApplicationContext data = new ApplicationContext();
             data.RemoveStory(idToRemove);
+        }
 
-            List<StoryData> storyData = data.GetStories();
-            List<Story> storyBook = new List<Story>();
-            foreach (StoryData story in storyData)
-            {
-                storyBook.Add(new Story(story.id, story.Title, story.Prompt));
-            }
+        public void AddNewStoryToBook(string title, string prompt)
+        {
+            ApplicationContext data = new ApplicationContext();
 
-            return storyBook;
+            data.AddStoryToDB(new StoryData(1, title, prompt));
         }
     }
 }

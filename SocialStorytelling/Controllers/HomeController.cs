@@ -23,11 +23,16 @@ namespace SocialStorytelling.Controllers
             return Json(storybook, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult RemoveStoryFromList(int idToRemove)
+        public void AddStoryToDB(string title, string prompt)
         {
             ControllerBusiness controller = new ControllerBusiness();
-            List<Story> storybook = controller.RemoveStoryFromBook(idToRemove);
-            return Json(storybook, JsonRequestBehavior.AllowGet);
+            controller.AddNewStoryToBook(title, prompt);
+        }
+
+        public void RemoveStoryFromList(int idToRemove)
+        {
+            ControllerBusiness controller = new ControllerBusiness();
+            controller.RemoveStoryFromBook(idToRemove);
         }
 
     }

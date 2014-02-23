@@ -21,12 +21,17 @@
             <p id="storycontainer"></p>
         </div>
 
+        <form action="#" onsubmit="return addStory(this);">
+            Title:<input type="text" name="title"><br>
+            Prompt: <input type="text" name="prompt"><br>
+            <input type="submit">
+        </form>
+
         <div>
             <button id="remove-story-button">Remove Story!</button>
             <input id="story-id-to-remove" value="1"/>
         </div>
         
-
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

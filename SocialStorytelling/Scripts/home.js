@@ -26,6 +26,18 @@ $(document).ready(function () {
                 data: {"idToRemove": idToRemove}
             });
         });
-
     });
 });
+
+function addStory(form) {
+    $.ajax({
+        url: "/Home/AddStoryToDB",
+        data: {
+            "title": form.title.value,
+            "prompt": form.prompt.value
+        }
+    });
+
+    alert("Story Added to DB");
+    return true;
+};

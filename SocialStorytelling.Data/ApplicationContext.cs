@@ -16,9 +16,7 @@ namespace SocialStorytelling.Data
         public List<StoryData> GetStories()
         {
             var db = new ApplicationContext();
-
             List<StoryData> stories = db.ListOfStories.ToList();
-
             return stories;
         }
 
@@ -39,15 +37,17 @@ namespace SocialStorytelling.Data
             }
         }
 
-
-
         public void RemoveStory(int idToRemove)
         {
             var db = new ApplicationContext();
-            var storyToRemove = new StoryData();
-            storyToRemove.id = idToRemove;
-            db.Entry(storyToRemove).State = EntityState.Deleted;
-            db.SaveChanges();
+
+            var story = db.ListOfStories.Find(idToRemove);
+
+            if (story != null) 
+            {
+                db.Entry(story).State = EntityState.Deleted;
+                db.SaveChanges();
+            }            
         }
     }
 }
