@@ -19,5 +19,13 @@ $(document).ready(function () {
             url: "/Home/GetStoryList"
         }).done(printStoryBook);
 
+        $('#remove-story-button').click(function () {
+            var idToRemove = $('#story-id-to-remove').val().toString()
+            $.ajax({
+                url: "/Home/RemoveStoryFromList",
+                data: {"idToRemove": idToRemove}
+            });
+        });
+
     });
 });

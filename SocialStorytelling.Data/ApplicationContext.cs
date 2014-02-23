@@ -40,5 +40,14 @@ namespace SocialStorytelling.Data
         }
 
 
+
+        public void RemoveStory(int idToRemove)
+        {
+            var db = new ApplicationContext();
+            var storyToRemove = new StoryData();
+            storyToRemove.id = idToRemove;
+            db.Entry(storyToRemove).State = EntityState.Deleted;
+            db.SaveChanges();
+        }
     }
 }
