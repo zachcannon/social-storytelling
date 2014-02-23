@@ -8,14 +8,14 @@ namespace SocialStorytelling.Data
 {
     public class StoryData
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         public string Title { get; set; }
         public string Prompt { get; set; }
         public List<EntryData> Entries { get; set; }
 
         public StoryData(int id, string title, string prompt)
         {
-            this.Id = id;
+            this.id = id;
             this.Title = title;
             this.Prompt = prompt;
         }
