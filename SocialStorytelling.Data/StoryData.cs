@@ -13,6 +13,8 @@ namespace SocialStorytelling.Data
         public string Prompt { get; set; }
         public List<EntryData> Entries { get; set; }
 
+        public StoryData() {}
+
         public StoryData(int id, string title, string prompt)
         {
             this.id = id;

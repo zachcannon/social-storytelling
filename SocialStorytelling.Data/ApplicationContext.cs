@@ -38,5 +38,7 @@ namespace SocialStorytelling.Data
                 db.Entry(story).CurrentValues.SetValues(newStory);
             }
         }
+
+
     }
 }
