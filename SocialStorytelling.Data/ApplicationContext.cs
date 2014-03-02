@@ -42,6 +42,22 @@ namespace SocialStorytelling.Data
             }
         }
 
+        public void AddEntryToDB(int entryId, string text, string author, int storyContainerId)
+        {
+            EntryData entry = new EntryData(entryId, text, author);
+
+            using (var db = new ApplicationContext())
+            {
+                var story = db.Stories.Find(storyContainerId);
+                entry.Story = story;
+                story.Entries.Add(entry);
+
+                db.Entries.Add(entry);
+
+                db.SaveChanges();
+            }
+        }
+
         public void RemoveStory(int idToRemove)
         {
             using (var db = new ApplicationContext())
@@ -56,19 +72,21 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public void AddEntryToDB(int entryId, string text, string author, int storyContainerId)
+        public void RemoveEntry(int idToRemove)
         {
-            EntryData entry = new EntryData(entryId, text, author);
-
             using (var db = new ApplicationContext())
             {
-                var story = db.Stories.Find(storyContainerId);
-                entry.Story = story;
-                story.Entries.Add(entry);
+                var entry = db.Entries.Find(idToRemove);
 
-                db.Entries.Add(entry);
+                if (entry != null)
+                {
+                    var storyForEntry = entry.Story;
+                    storyForEntry.Entries.Remove(entry);
 
-                db.SaveChanges();
+                    db.Entries.Remove(entry);
+
+                    db.SaveChanges();
+                }
             }
         }
     }

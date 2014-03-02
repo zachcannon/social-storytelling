@@ -25,13 +25,7 @@ namespace SocialStorytelling.Business
             }
 
             return storyBook;
-        }
-
-        public void RemoveStoryFromBook(int idToRemove)
-        {
-            ApplicationContext data = new ApplicationContext();
-            data.RemoveStory(idToRemove);
-        }
+        }       
 
         public void AddNewStoryToBook(string title, string prompt)
         {
@@ -43,6 +37,19 @@ namespace SocialStorytelling.Business
         {
             ApplicationContext data = new ApplicationContext();
             data.AddEntryToDB(1, text, author, storyId);
+        }
+
+
+        public void RemoveStoryFromBook(int idToRemove)
+        {
+            ApplicationContext data = new ApplicationContext();
+            data.RemoveStory(idToRemove);
+        }
+
+        public void RemoveEntryFromList(int idToRemove)
+        {
+            ApplicationContext data = new ApplicationContext();
+            data.RemoveEntry(idToRemove);
         }
     }
 }

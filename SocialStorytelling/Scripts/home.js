@@ -26,6 +26,14 @@ $(document).ready(function () {
                 data: {"idToRemove": idToRemove}
             });
         });
+
+        $('#remove-entry-button').click(function () {
+            var idToRemove = $('#entry-id-to-remove').val().toString()
+            $.ajax({
+                url: "/Home/RemoveEntry",
+                data: { "idToRemove": idToRemove }
+            });
+        });
     });
 });
 
