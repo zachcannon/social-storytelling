@@ -22,7 +22,7 @@ $(document).ready(function () {
         $('#remove-story-button').click(function () {
             var idToRemove = $('#story-id-to-remove').val().toString()
             $.ajax({
-                url: "/Home/RemoveStoryFromList",
+                url: "/Home/RemoveStory",
                 data: {"idToRemove": idToRemove}
             });
         });
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 function addStory(form) {
     $.ajax({
-        url: "/Home/AddStoryToDB",
+        url: "/Home/AddNewStory",
         data: {
             "title": form.title.value,
             "prompt": form.prompt.value
@@ -44,7 +44,7 @@ function addStory(form) {
 
 function addEntry(form) {
     $.ajax({
-        url: "/Home/AddEntryToStory",
+        url: "/Home/AddNewEntry",
         data: {
             "text": form.text.value,
             "author": form.author.value,
