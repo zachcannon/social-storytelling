@@ -23,6 +23,15 @@ namespace SocialStorytelling.Data
             }
         }
 
+        public List<EntryData> GetEntries()
+        {
+            using (var db = new ApplicationContext())
+            {
+                List<EntryData> entries = db.Entries.ToList();
+                return entries;
+            }
+        }
+
         public void AddStoryToDB(StoryData newStory)
         {
             using (var db = new ApplicationContext())

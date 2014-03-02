@@ -18,10 +18,11 @@
     
     <div class="container body-content">
         <div class="jumbotron">
-            <p id="storycontainer"></p>
-            <p id="entrycontainer"></p>
+            <p id="storycontainer">STORIES: <br></p>
+            <p id="entrycontainer">ENTRIES: <br></p>
         </div>
         <div>
+            <p><br />Add New Story</p>
             <form action="#" onsubmit="return addStory(this);">
                 Title:<input type="text" name="title"><br>
                 Prompt: <input type="text" name="prompt"><br>
@@ -30,6 +31,7 @@
         </div>
 
         <div>
+            <p><br />Add New Entry</p>
             <form action="#" onsubmit="return addEntry(this);">
                 Text:<input type="text" name="text"><br>
                 Author: <input type="text" name="author"><br>
@@ -39,11 +41,13 @@
         </div>
 
         <div>
+            <p><br />Remove Story</p>
             <button id="remove-story-button">Remove Story!</button>
             <input id="story-id-to-remove" value="1"/>
         </div>
         
         <div>
+            <p><br />Remove Entry</p>
             <button id="remove-entry-button">Remove Entry!</button>
             <input id="entry-id-to-remove" value="1" />
         </div>

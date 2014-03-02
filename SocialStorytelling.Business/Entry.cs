@@ -12,12 +12,12 @@ namespace SocialStorytelling.Business
         public string Author { get; set; }
         public DateTime SubmissionDate { get; set; }
 
-        public Entry(string text, string author, int idNumber, int storyContainerId)
+        public Entry(string text, string author, int idNumber, DateTime submissionDate)
         {
             this.IdNumber = idNumber;
             this.Text = text;
             this.Author = author;
-            this.SubmissionDate = DateTime.Now;
+            this.SubmissionDate = submissionDate;
         }
     }
 }

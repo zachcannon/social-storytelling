@@ -25,7 +25,22 @@ namespace SocialStorytelling.Business
             }
 
             return storyBook;
-        }       
+        }
+
+        public List<Entry> GetEntryList()
+        {
+            ApplicationContext data = new ApplicationContext();
+
+            List<EntryData> entryData = data.GetEntries();
+
+            List<Entry> entryList = new List<Entry>();
+            foreach (EntryData entry in entryData)
+            {
+                entryList.Add(new Entry(entry.Text, entry.Author, entry.id, entry.SubmissionDate));
+            }
+
+            return entryList;
+        }
 
         public void AddNewStoryToBook(string title, string prompt)
         {
@@ -51,5 +66,6 @@ namespace SocialStorytelling.Business
             ApplicationContext data = new ApplicationContext();
             data.RemoveEntry(idToRemove);
         }
+
     }
 }

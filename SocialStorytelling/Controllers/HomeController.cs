@@ -23,6 +23,13 @@ namespace SocialStorytelling.Controllers
             return Json(storybook, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetEntryList()
+        {
+            ControllerBusiness controller = new ControllerBusiness();
+            List<Entry> entryList = controller.GetEntryList();
+            return Json(entryList, JsonRequestBehavior.AllowGet);
+        }
+
         public void AddNewStory(string title, string prompt)
         {
             ControllerBusiness controller = new ControllerBusiness();
