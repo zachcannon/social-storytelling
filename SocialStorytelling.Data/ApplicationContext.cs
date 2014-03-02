@@ -11,43 +11,65 @@ namespace SocialStorytelling.Data
     {
         public ApplicationContext() {}
 
-        public DbSet<StoryData> ListOfStories { get; set; }
+        public DbSet<StoryData> Stories { get; set; }
+        public DbSet<EntryData> Entries { get; set; }
 
         public List<StoryData> GetStories()
         {
-            var db = new ApplicationContext();
-            List<StoryData> stories = db.ListOfStories.ToList();
-            return stories;
+            using (var db = new ApplicationContext())
+            {
+                List<StoryData> stories = db.Stories.ToList();
+                return stories;
+            }
         }
 
         public void AddStoryToDB(StoryData newStory)
         {
-            var db = new ApplicationContext();
-
-            var story = db.ListOfStories.Find(newStory.id);
-
-            if (story == null)
+            using (var db = new ApplicationContext())
             {
-                db.ListOfStories.Add(newStory);
-                db.SaveChanges();
-            }
-            else
-            {
-                db.Entry(story).CurrentValues.SetValues(newStory);
+
+                var story = db.Stories.Find(newStory.id);
+
+                if (story == null)
+                {
+                    db.Stories.Add(newStory);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.Entry(story).CurrentValues.SetValues(newStory);
+                }
             }
         }
 
         public void RemoveStory(int idToRemove)
         {
-            var db = new ApplicationContext();
-
-            var story = db.ListOfStories.Find(idToRemove);
-
-            if (story != null) 
+            using (var db = new ApplicationContext())
             {
-                db.Entry(story).State = EntityState.Deleted;
+                var story = db.Stories.Find(idToRemove);
+
+                if (story != null)
+                {
+                    db.Stories.Remove(story);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void AddEntryToDB(int entryId, string text, string author, int storyContainerId)
+        {
+            EntryData entry = new EntryData(entryId, text, author);
+
+            using (var db = new ApplicationContext())
+            {
+                var story = db.Stories.Find(storyContainerId);
+                entry.Story = story;
+                story.Entries.Add(entry);
+
+                db.Entries.Add(entry);
+
                 db.SaveChanges();
-            }            
+            }
         }
     }
 }

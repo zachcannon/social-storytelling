@@ -29,10 +29,16 @@ namespace SocialStorytelling.Controllers
             controller.AddNewStoryToBook(title, prompt);
         }
 
-        public void RemoveStoryFromList(int idToRemove)
+        public void RemoveStoryFromDB(int idToRemove)
         {
             ControllerBusiness controller = new ControllerBusiness();
             controller.RemoveStoryFromBook(idToRemove);
+        }
+
+        public void AddEntryToStory(string text, string author, int storyId)
+        {
+            ControllerBusiness controller = new ControllerBusiness();
+            controller.AddEntryToStory(storyId, author, text);
         }
 
     }

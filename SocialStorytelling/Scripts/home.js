@@ -41,3 +41,17 @@ function addStory(form) {
     alert("Story Added to DB");
     return true;
 };
+
+function addEntry(form) {
+    $.ajax({
+        url: "/Home/AddEntryToStory",
+        data: {
+            "text": form.text.value,
+            "author": form.author.value,
+            "storyId": form.storyId.value
+        }
+    });
+
+    alert("Entry Added to DB");
+    return true;
+};

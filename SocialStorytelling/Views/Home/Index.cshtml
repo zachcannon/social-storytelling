@@ -19,13 +19,24 @@
     <div class="container body-content">
         <div class="jumbotron">
             <p id="storycontainer"></p>
+            <p id="entrycontainer"></p>
+        </div>
+        <div>
+            <form action="#" onsubmit="return addStory(this);">
+                Title:<input type="text" name="title"><br>
+                Prompt: <input type="text" name="prompt"><br>
+                <input type="submit">
+            </form>
         </div>
 
-        <form action="#" onsubmit="return addStory(this);">
-            Title:<input type="text" name="title"><br>
-            Prompt: <input type="text" name="prompt"><br>
-            <input type="submit">
-        </form>
+        <div>
+            <form action="#" onsubmit="return addEntry(this);">
+                Text:<input type="text" name="text"><br>
+                Author: <input type="text" name="author"><br>
+                StoryID: <input type="text" name="storyId"><br>
+                <input type="submit">
+            </form>
+        </div>
 
         <div>
             <button id="remove-story-button">Remove Story!</button>

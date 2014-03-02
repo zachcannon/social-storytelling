@@ -11,7 +11,7 @@ namespace SocialStorytelling.Data
         public int id { get; set; }
         public string Title { get; set; }
         public string Prompt { get; set; }
-        public List<EntryData> Entries { get; set; }
+        public virtual List<EntryData> Entries { get; set; }
 
         public StoryData() {}
 

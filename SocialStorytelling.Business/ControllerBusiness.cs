@@ -36,8 +36,13 @@ namespace SocialStorytelling.Business
         public void AddNewStoryToBook(string title, string prompt)
         {
             ApplicationContext data = new ApplicationContext();
-
             data.AddStoryToDB(new StoryData(1, title, prompt));
+        }
+
+        public void AddEntryToStory(int storyId, string author, string text)
+        {
+            ApplicationContext data = new ApplicationContext();
+            data.AddEntryToDB(1, text, author, storyId);
         }
     }
 }

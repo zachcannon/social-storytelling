@@ -12,8 +12,11 @@ namespace SocialStorytelling.Data
         public string Text { get; set; }
         public string Author { get; set; }
         public DateTime SubmissionDate { get; set; }
+        public virtual StoryData Story { get; set; }
 
-        public EntryData(int idNumber, string text, string author, int storyContainerId)
+        public EntryData() { }
+
+        public EntryData(int idNumber, string text, string author)
         {
             this.id = idNumber;
             this.Text = text;
