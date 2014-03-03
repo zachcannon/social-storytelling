@@ -58,16 +58,23 @@ namespace SocialStorytelling.Business
 
         public void AddNewStoryToBook(string title, string prompt)
         {
+            Censor censor = new Censor();
+            title = censor.CensorText(title);
+            prompt = censor.CensorText(prompt);
+
             ApplicationContext data = new ApplicationContext();
             data.AddStoryToDB(new StoryData(1, title, prompt));
         }
 
         public void AddEntryToStory(int storyId, string author, string text)
         {
+            Censor censor = new Censor();
+            author = censor.CensorText(author);
+            text = censor.CensorText(text);
+
             ApplicationContext data = new ApplicationContext();
             data.AddEntryToDB(1, text, author, storyId);
         }
-
 
         public void RemoveStoryFromBook(int idToRemove)
         {
