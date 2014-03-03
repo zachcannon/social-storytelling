@@ -88,6 +88,15 @@ $(document).ready(function () {
             });
         });
 
+        $('#promote-pending-entry-button').click(function () {
+            var idToPromote = $('#pending-entry-id-to-promote').val().toString();
+
+            $.ajax({
+                url: "/Home/PromotePendingEntry",
+                data: { "idToPromote": idToPromote }
+            });
+        });
+
         var printStoryEntry = function (i, data) {
             $('#specific-entries').append(data.IdNumber);
             $('#specific-entries').append("  ");

@@ -72,5 +72,10 @@ namespace SocialStorytelling.Controllers
             controller.RemovePendingEntryFromList(idToRemove);
         }
 
+        public void PromotePendingEntry(int idToPromote)
+        {
+            controller.PromotePendingEntryFromList(idToPromote);
+        }
+
     }
 }

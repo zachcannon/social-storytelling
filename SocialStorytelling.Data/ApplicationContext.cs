@@ -51,6 +51,15 @@ namespace SocialStorytelling.Data
             }
         }
 
+        public PendingEntryData GetPendingEntryById(int pendingEntryId)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var entry = db.PendingEntries.Find(pendingEntryId);
+                return entry;
+            }
+        }
+
         public void AddStoryToDb(StoryData newStory)
         {
             using (var db = new ApplicationContext())

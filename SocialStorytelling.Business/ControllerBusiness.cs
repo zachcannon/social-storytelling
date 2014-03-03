@@ -119,5 +119,14 @@ namespace SocialStorytelling.Business
             data.RemovePendingEntry(idToRemove);
         }
 
+        public void PromotePendingEntryFromList(int idToPromote)
+        {
+            ApplicationContext data = new ApplicationContext();
+
+            PendingEntryData pendingEntryToPromote = data.GetPendingEntryById(idToPromote);
+
+            AddEntryToStory(pendingEntryToPromote.StoryIBelongTo, pendingEntryToPromote.Author, pendingEntryToPromote.Text);
+            data.RemovePendingEntry(pendingEntryToPromote.id);
+        }
     }
 }
