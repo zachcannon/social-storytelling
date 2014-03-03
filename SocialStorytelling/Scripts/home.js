@@ -40,6 +40,27 @@ $(document).ready(function () {
             url: "/Home/GetEntryList"
         }).done(printEntryList);
 
+        var printPendingEntry = function (i, data) {
+            $('#pendingentrycontainer').append(data.IdNumber);
+            $('#pendingentrycontainer').append("  ");
+            $('#pendingentrycontainer').append(data.Text);
+            $('#pendingentrycontainer').append("  ");
+            $('#pendingentrycontainer').append(data.Author);
+            $('#pendingentrycontainer').append("  ");
+            $('#pendingentrycontainer').append(data.StoryId);
+            $('#pendingentrycontainer').append("  ");
+            $('#pendingentrycontainer').append(data.SubmissionDate);
+            $('#pendingentrycontainer').append("<br>");
+        }
+
+        var printPendingEntryList = function (data) {
+            $.each(data, printPendingEntry);
+        };
+
+        $.ajax({
+            url: "/Home/GetPendingEntryList"
+        }).done(printPendingEntryList);
+
         $('#remove-story-button').click(function () {
             var idToRemove = $('#story-id-to-remove').val().toString();
 
@@ -54,6 +75,15 @@ $(document).ready(function () {
 
             $.ajax({
                 url: "/Home/RemoveEntry",
+                data: { "idToRemove": idToRemove }
+            });
+        });
+
+        $('#remove-pending-entry-button').click(function () {
+            var idToRemove = $('#pending-entry-id-to-remove').val().toString();
+
+            $.ajax({
+                url: "/Home/RemovePendingEntry",
                 data: { "idToRemove": idToRemove }
             });
         });
@@ -109,6 +139,20 @@ function addEntry(form) {
     });
 
     alert("Entry Added to DB");
+    return true;
+};
+
+function addPendingEntry(form) {
+    $.ajax({
+        url: "/Home/AddNewPendingEntry",
+        data: {
+            "text": form.text.value,
+            "author": form.author.value,
+            "storyId": form.storyId.value
+        }
+    });
+
+    alert("Pending Entry Added to DB");
     return true;
 };
 

@@ -13,6 +13,7 @@ namespace SocialStorytelling.Data
 
         public DbSet<StoryData> Stories { get; set; }
         public DbSet<EntryData> Entries { get; set; }
+        public DbSet<PendingEntryData> PendingEntries { get; set; }
 
         public List<StoryData> GetStories()
         {
@@ -32,6 +33,15 @@ namespace SocialStorytelling.Data
             }
         }
 
+        public List<PendingEntryData> GetPendingEntries()
+        {
+            using (var db = new ApplicationContext())
+            {
+                List<PendingEntryData> pendingEntries = db.PendingEntries.ToList();
+                return pendingEntries;
+            }
+        }
+
         public List<EntryData> GetEntriesForStoryFromDb(int storyId)
         {
             using (var db = new ApplicationContext())
@@ -41,7 +51,7 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public void AddStoryToDB(StoryData newStory)
+        public void AddStoryToDb(StoryData newStory)
         {
             using (var db = new ApplicationContext())
             {
@@ -60,7 +70,7 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public void AddEntryToDB(int entryId, string text, string author, int storyContainerId)
+        public void AddEntryToDb(int entryId, string text, string author, int storyContainerId)
         {
             EntryData entry = new EntryData(entryId, text, author);
 
@@ -72,6 +82,17 @@ namespace SocialStorytelling.Data
 
                 db.Entries.Add(entry);
 
+                db.SaveChanges();
+            }
+        }
+
+        public void AddPendingEntryToDb(int entryId, string text, string author, int storyId)
+        {
+            PendingEntryData entry = new PendingEntryData(entryId, text, author, storyId);
+
+            using (var db = new ApplicationContext())
+            {
+                db.PendingEntries.Add(entry);
                 db.SaveChanges();
             }
         }
@@ -103,6 +124,20 @@ namespace SocialStorytelling.Data
 
                     db.Entries.Remove(entry);
 
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void RemovePendingEntry(int idToRemove)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var entry = db.PendingEntries.Find(idToRemove);
+
+                if(entry != null)
+                {
+                    db.PendingEntries.Remove(entry);
                     db.SaveChanges();
                 }
             }

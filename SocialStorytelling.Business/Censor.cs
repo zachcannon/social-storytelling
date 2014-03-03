@@ -15,6 +15,8 @@ namespace SocialStorytelling.Business
           "fuck",
           "shit",
           "damn",
+          "ass",
+          "cunt"
         };
 
         public IList<string> CensoredWords { get; private set; }

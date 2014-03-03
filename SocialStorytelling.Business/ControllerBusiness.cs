@@ -56,6 +56,21 @@ namespace SocialStorytelling.Business
             return entryList;
         }
 
+        public List<PendingEntry> GetPendingEntryList()
+        {
+            ApplicationContext data = new ApplicationContext();
+
+            List<PendingEntryData> pendingEntryData = data.GetPendingEntries();
+
+            List<PendingEntry> entryList = new List<PendingEntry>();
+            foreach (PendingEntryData entry in pendingEntryData)
+            {
+                entryList.Add(new PendingEntry(entry.Text, entry.Author, entry.id, entry.StoryIBelongTo, entry.SubmissionDate));
+            }
+
+            return entryList;
+        }
+
         public void AddNewStoryToBook(string title, string prompt)
         {
             Censor censor = new Censor();
@@ -63,7 +78,7 @@ namespace SocialStorytelling.Business
             prompt = censor.CensorText(prompt);
 
             ApplicationContext data = new ApplicationContext();
-            data.AddStoryToDB(new StoryData(1, title, prompt));
+            data.AddStoryToDb(new StoryData(1, title, prompt));
         }
 
         public void AddEntryToStory(int storyId, string author, string text)
@@ -73,7 +88,17 @@ namespace SocialStorytelling.Business
             text = censor.CensorText(text);
 
             ApplicationContext data = new ApplicationContext();
-            data.AddEntryToDB(1, text, author, storyId);
+            data.AddEntryToDb(1, text, author, storyId);
+        }
+
+        public void AddPendingEntryToList(int storyId, string author, string text)
+        {
+            Censor censor = new Censor();
+            author = censor.CensorText(author);
+            text = censor.CensorText(text);
+
+            ApplicationContext data = new ApplicationContext();
+            data.AddPendingEntryToDb(1, text, author, storyId);
         }
 
         public void RemoveStoryFromBook(int idToRemove)
@@ -86,6 +111,12 @@ namespace SocialStorytelling.Business
         {
             ApplicationContext data = new ApplicationContext();
             data.RemoveEntry(idToRemove);
+        }
+
+        public void RemovePendingEntryFromList(int idToRemove)
+        {
+            ApplicationContext data = new ApplicationContext();
+            data.RemovePendingEntry(idToRemove);
         }
 
     }

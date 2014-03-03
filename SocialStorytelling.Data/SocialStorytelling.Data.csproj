@@ -56,7 +56,12 @@
     <Compile Include="Migrations\201403021822469_AddEntriesToStory.Designer.cs">
       <DependentUpon>201403021822469_AddEntriesToStory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403030419513_EntryDataUpdated.cs" />
+    <Compile Include="Migrations\201403030419513_EntryDataUpdated.Designer.cs">
+      <DependentUpon>201403030419513_EntryDataUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PendingEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoryData.cs" />
   </ItemGroup>
@@ -70,6 +75,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403021822469_AddEntriesToStory.resx">
       <DependentUpon>201403021822469_AddEntriesToStory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403030419513_EntryDataUpdated.resx">
+      <DependentUpon>201403030419513_EntryDataUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

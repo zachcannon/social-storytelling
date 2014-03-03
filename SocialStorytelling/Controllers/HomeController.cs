@@ -36,13 +36,25 @@ namespace SocialStorytelling.Controllers
             return Json(entryList, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetPendingEntryList()
+        {
+            List<PendingEntry> pendingEntryList = controller.GetPendingEntryList();
+            return Json(pendingEntryList, JsonRequestBehavior.AllowGet);
+        }
+
         public void AddNewStory(string title, string prompt)
         {
             controller.AddNewStoryToBook(title, prompt);
         }
+        
         public void AddNewEntry(string text, string author, int storyId)
         {
             controller.AddEntryToStory(storyId, author, text);
+        }
+
+        public void AddNewPendingEntry(string text, string author, int storyId)
+        {
+            controller.AddPendingEntryToList(storyId, author, text);
         }
 
         public void RemoveStory(int idToRemove)
@@ -53,6 +65,11 @@ namespace SocialStorytelling.Controllers
         public void RemoveEntry(int idToRemove)
         {
             controller.RemoveEntryFromList(idToRemove);
+        }
+
+        public void RemovePendingEntry(int idToRemove)
+        {
+            controller.RemovePendingEntryFromList(idToRemove);
         }
 
     }

@@ -20,6 +20,7 @@
         <div class="jumbotron">
             <p id="storycontainer">STORIES: <br></p>
             <p id="entrycontainer">ENTRIES: <br></p>
+            <p id="pendingentrycontainer">PENDING ENTRIES: <br></p>
         </div>
         <div>
             <p><br />Add New Story</p>
@@ -31,6 +32,12 @@
         </div>
 
         <div>
+            <p><br />Remove Story</p>
+            <button id="remove-story-button">Remove Story!</button>
+            <input id="story-id-to-remove" value="1" />
+        </div>
+
+        <div>
             <p><br />Add New Entry</p>
             <form action="#" onsubmit="return addEntry(this);">
                 Text:<input type="text" name="text"><br>
@@ -39,13 +46,7 @@
                 <input type="submit">
             </form>
         </div>
-
-        <div>
-            <p><br />Remove Story</p>
-            <button id="remove-story-button">Remove Story!</button>
-            <input id="story-id-to-remove" value="1"/>
-        </div>
-        
+                
         <div>
             <p><br />Remove Entry</p>
             <button id="remove-entry-button">Remove Entry!</button>
@@ -58,6 +59,22 @@
             <input id="choose-story-id" value="1" />
 
             <p id="specific-entries">Specific Entries<br /></p>
+        </div>
+
+        <div>
+            <p><br />Add New Pending Entry</p>
+            <form action="#" onsubmit="return addPendingEntry(this);">
+                Text:<input type="text" name="text"><br>
+                Author: <input type="text" name="author"><br>
+                StoryID: <input type="text" name="storyId"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Remove Pending Entry</p>
+            <button id="remove-pending-entry-button">Remove Pending Entry!</button>
+            <input id="pending-entry-id-to-remove" value="1" />
         </div>
 
         <hr />
