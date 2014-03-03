@@ -42,6 +42,20 @@ namespace SocialStorytelling.Business
             return entryList;
         }
 
+        public List<Entry> GetEntriesForGivenStory(int storyId)
+        {
+            ApplicationContext data = new ApplicationContext();
+            List<EntryData> entryData = data.GetEntriesForStoryFromDb(storyId);
+
+            List<Entry> entryList = new List<Entry>();
+            foreach (EntryData entry in entryData)
+            {
+                entryList.Add(new Entry(entry.Text, entry.Author, entry.id, entry.SubmissionDate));
+            }
+
+            return entryList;
+        }
+
         public void AddNewStoryToBook(string title, string prompt)
         {
             ApplicationContext data = new ApplicationContext();

@@ -28,8 +28,6 @@ $(document).ready(function () {
             $('#entrycontainer').append("  ");
             $('#entrycontainer').append(data.Author);
             $('#entrycontainer').append("  ");
-            $('#entrycontainer').append(data.StoryContainerId);
-            $('#entrycontainer').append("  ");
             $('#entrycontainer').append(data.SubmissionDate);
             $('#entrycontainer').append("<br>");
         }
@@ -59,6 +57,31 @@ $(document).ready(function () {
                 data: { "idToRemove": idToRemove }
             });
         });
+
+        var printStoryEntry = function (i, data) {
+            $('#specific-entries').append(data.IdNumber);
+            $('#specific-entries').append("  ");
+            $('#specific-entries').append(data.Text);
+            $('#specific-entries').append("  ");
+            $('#specific-entries').append(data.Author);
+            $('#specific-entries').append("  ");
+            $('#specific-entries').append(data.SubmissionDate);
+            $('#specific-entries').append("<br>");
+        }
+
+        var printAStorysEntryList = function (data) {
+            $.each(data, printStoryEntry)
+        }
+
+        $('#choose-story-button').click(function () {
+            var idOfStory = $('#choose-story-id').val().toString();
+
+            $.ajax({
+                url: "/Home/GetEntriesForGivenStory",
+                data: { "storyId": idOfStory }
+            }).done(printAStorysEntryList);
+        });
+
     });
 });
 
