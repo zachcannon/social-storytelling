@@ -51,6 +51,25 @@ namespace SocialStorytelling.Data
             }
         }
 
+        public List<PendingEntryData> GetPendingEntriesForStoryFromDb(int storyId)
+        {
+            List<PendingEntryData> pendingEntriesForStory = new List<PendingEntryData>();
+
+            using (var db = new ApplicationContext())
+            {
+                var listOfPendingEntries = db.PendingEntries.ToList();
+                
+                foreach(PendingEntryData pending in listOfPendingEntries)
+                {
+                    if (pending.StoryIBelongTo == storyId)
+                        pendingEntriesForStory.Add(pending);
+                }
+
+            }
+
+            return pendingEntriesForStory;
+        }
+
         public PendingEntryData GetPendingEntryById(int pendingEntryId)
         {
             using (var db = new ApplicationContext())
@@ -112,9 +131,23 @@ namespace SocialStorytelling.Data
             {
                 var story = db.Stories.Find(idToRemove);
 
+                var entriesFromStory = this.GetEntriesForStoryFromDb(idToRemove);
+                var pendingEntriesFromStory = this.GetPendingEntriesForStoryFromDb(idToRemove);
+
                 if (story != null)
                 {
+                    foreach (var entry in entriesFromStory)
+                    {
+                        this.RemoveEntry(entry.id);
+                    }
+
+                    foreach (var pendingEntry in pendingEntriesFromStory)
+                    {
+                        this.RemovePendingEntry(pendingEntry.id);
+                    }
+
                     db.Stories.Remove(story);
+
                     db.SaveChanges();
                 }
             }
