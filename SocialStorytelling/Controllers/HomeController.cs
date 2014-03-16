@@ -10,7 +10,7 @@ namespace SocialStorytelling.Controllers
 {
     public class HomeController : Controller
     {
-        ControllerBusiness controller = new ControllerBusiness();
+        SocialStorytellingService service = new SocialStorytellingService();
 
         public ActionResult Index()
         {
@@ -20,61 +20,61 @@ namespace SocialStorytelling.Controllers
 
         public ActionResult GetStoryList()
         {
-            List<Story> storybook = controller.GetStoryBook();
+            List<Story> storybook = service.GetStoryBook();
             return Json(storybook, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetEntryList()
         {
-            List<Entry> entryList = controller.GetEntryList();
+            List<Entry> entryList = service.GetEntryList();
             return Json(entryList, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetEntriesForGivenStory(int storyId)
         {
-            List<Entry> entryList = controller.GetEntriesForGivenStory(storyId);
+            List<Entry> entryList = service.GetEntriesForGivenStory(storyId);
             return Json(entryList, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetPendingEntryList()
         {
-            List<PendingEntry> pendingEntryList = controller.GetPendingEntryList();
+            List<PendingEntry> pendingEntryList = service.GetPendingEntryList();
             return Json(pendingEntryList, JsonRequestBehavior.AllowGet);
         }
 
         public void AddNewStory(string title, string prompt)
         {
-            controller.AddNewStoryToBook(title, prompt);
+            service.AddNewStoryToBook(title, prompt);
         }
         
         public void AddNewEntry(string text, string author, int storyId)
         {
-            controller.AddEntryToStory(storyId, author, text);
+            service.AddEntryToStory(storyId, author, text);
         }
 
         public void AddNewPendingEntry(string text, string author, int storyId)
         {
-            controller.AddPendingEntryToList(storyId, author, text);
+            service.AddPendingEntryToList(storyId, author, text);
         }
 
         public void RemoveStory(int idToRemove)
         {
-            controller.RemoveStoryFromBook(idToRemove);
+            service.RemoveStoryFromBook(idToRemove);
         }
       
         public void RemoveEntry(int idToRemove)
         {
-            controller.RemoveEntryFromList(idToRemove);
+            service.RemoveEntryFromList(idToRemove);
         }
 
         public void RemovePendingEntry(int idToRemove)
         {
-            controller.RemovePendingEntryFromList(idToRemove);
+            service.RemovePendingEntryFromList(idToRemove);
         }
 
         public void PromotePendingEntry(int idToPromote)
         {
-            controller.PromotePendingEntryFromList(idToPromote);
+            service.PromotePendingEntryFromList(idToPromote);
         }
 
     }

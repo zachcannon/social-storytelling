@@ -8,9 +8,9 @@ using SocialStorytelling.Data;
 
 namespace SocialStorytelling.Business
 {
-    public class ControllerBusiness
+    public class SocialStorytellingService
     {
-        public ControllerBusiness() {}
+        public SocialStorytellingService() {}
 
         public List<Story> GetStoryBook()
         {

@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Censor.cs" />
-    <Compile Include="ControllerBusiness.cs" />
+    <Compile Include="SocialStorytellingService.cs" />
     <Compile Include="PendingEntry.cs" />
     <Compile Include="Story.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
