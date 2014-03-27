@@ -42,6 +42,12 @@ namespace SocialStorytelling.Controllers
             return Json(pendingEntryList, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult RegisterNewUser(string username, string password)
+        {
+            string returnValue = service.RegisterNewUser(username, password);
+            return Json(returnValue, JsonRequestBehavior.AllowGet);
+        }
+
         public void AddNewStory(string title, string prompt)
         {
             service.AddNewStoryToBook(title, prompt);

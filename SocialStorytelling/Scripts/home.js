@@ -165,3 +165,24 @@ function addPendingEntry(form) {
     return true;
 };
 
+function registerUser(form) {
+    var updateRegisterReturn = function (data) {
+        $('#registerReturn').append(data);
+    };
+
+    $.ajax({
+        url: "/Home/RegisterNewUser",
+        data: {
+            "username": form.username.value,
+            "password": form.password.value
+        }
+    }).done(updateRegisterReturn);
+
+    return true;
+};
+
+function loginUser(form) {
+    alert("Inside login function");
+    return true;
+};
+

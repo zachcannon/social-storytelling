@@ -5,12 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using SocialStorytelling.Data;
+using Tweetinvi;
 
 namespace SocialStorytelling.Business
 {
     public class SocialStorytellingService
     {
-        public SocialStorytellingService() {}
+        public SocialStorytellingService() {
+            TwitterCredentials.SetCredentials(
+                "1967921323-YmXyEmN3g5ZntOf2Gl5l4yjugJKhnJLOek5EEQc",
+                "CcqCr28LpACBuxJNBjiN2K3KJmbIqDWrlnnQ9sB87bp93", 
+                "lgs8hg45HbaaLkkKFHDbzQ", 
+                "JiaTz1ixrFdmFigEXalqZP2xL00c3EscVldyndvWI");
+        }
 
         public List<Story> GetStoryBook()
         {
@@ -127,6 +134,18 @@ namespace SocialStorytelling.Business
 
             AddEntryToStory(pendingEntryToPromote.StoryIBelongTo, pendingEntryToPromote.Author, pendingEntryToPromote.Text);
             data.RemovePendingEntry(pendingEntryToPromote.id);
+        }
+
+        public string RegisterNewUser(string username, string password)
+        {
+            string returnValue = "Cannot Register this username";
+            var user = User.GetUserFromScreenName(username);
+            if (user != null)
+            {
+                ApplicationContext data = new ApplicationContext();
+                returnValue = data.AddNewUser(username, password);
+            }
+            return returnValue;
         }
     }
 }
