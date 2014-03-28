@@ -10,12 +10,13 @@ using Tweetinvi;
 namespace SocialStorytelling.Business
 {
     public class SocialStorytellingService
-    {
-        public SocialStorytellingService() {
+    {       
+        public SocialStorytellingService()
+        {
             TwitterCredentials.SetCredentials(
                 "1967921323-YmXyEmN3g5ZntOf2Gl5l4yjugJKhnJLOek5EEQc",
-                "CcqCr28LpACBuxJNBjiN2K3KJmbIqDWrlnnQ9sB87bp93", 
-                "lgs8hg45HbaaLkkKFHDbzQ", 
+                "CcqCr28LpACBuxJNBjiN2K3KJmbIqDWrlnnQ9sB87bp93",
+                "lgs8hg45HbaaLkkKFHDbzQ",
                 "JiaTz1ixrFdmFigEXalqZP2xL00c3EscVldyndvWI");
         }
 
@@ -146,6 +147,27 @@ namespace SocialStorytelling.Business
                 returnValue = data.AddNewUser(username, password);
             }
             return returnValue;
+        }
+
+        public string LoginUser(string username, string password)
+        {
+            string returnValue = "invalidLogin";
+
+            ApplicationContext data = new ApplicationContext();
+            bool areUsersCredentialsValid = data.LoginUser(username, password);
+
+            if (areUsersCredentialsValid)
+            {
+                returnValue = username;
+            }
+
+            return returnValue;
+        }
+
+        public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string usersPassword)
+        {
+            ApplicationContext data = new ApplicationContext();
+            data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting, usersPassword);
         }
     }
 }

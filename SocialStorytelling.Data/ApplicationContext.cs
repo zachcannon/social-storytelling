@@ -121,8 +121,13 @@ namespace SocialStorytelling.Data
 
             using (var db = new ApplicationContext())
             {
-                db.PendingEntries.Add(entry);
-                db.SaveChanges();
+                var story = db.Stories.Find(storyId);
+
+                if (story != null)
+                {
+                    db.PendingEntries.Add(entry);
+                    db.SaveChanges();
+                }              
             }
         }
 
@@ -203,6 +208,40 @@ namespace SocialStorytelling.Data
             }
 
             return returnMessage;
+        }
+
+        public bool LoginUser(string username, string password)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var user = db.Users.Find(username);
+                if (user != null)
+                {
+                    if (user.password.Equals(password))
+                        return true;
+                }                
+                return false;
+            }
+        }
+
+        public void CastVoteForStoryFromUser(int idToVoteFor, string userWhoIsVoting, string usersPassword)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var user = db.Users.Find(userWhoIsVoting);
+                if (user == null || !user.password.Equals(usersPassword))
+                    return;
+
+                var pendingEntry = db.PendingEntries.Find(idToVoteFor);
+                
+                if (!pendingEntry.Voters.Contains(userWhoIsVoting))
+                {
+                    pendingEntry.Voters = pendingEntry.Voters+userWhoIsVoting;
+                    pendingEntry.VotesCastForMe++;
+
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

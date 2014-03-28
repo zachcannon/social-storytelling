@@ -13,6 +13,8 @@ namespace SocialStorytelling.Data
         public string Author { get; set; }
         public DateTime SubmissionDate { get; set; }
         public int StoryIBelongTo { get; set; }
+        public int VotesCastForMe { get; set; }
+        public string Voters { get; set; }
 
         public PendingEntryData() { }
 
@@ -23,6 +25,8 @@ namespace SocialStorytelling.Data
             this.Author = author;
             this.SubmissionDate = DateTime.Now;
             this.StoryIBelongTo = storyId;
+            this.VotesCastForMe = 0;
+            this.Voters = "";
         }
     }
 }

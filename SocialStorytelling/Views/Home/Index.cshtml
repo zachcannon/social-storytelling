@@ -40,6 +40,7 @@
                 Password: <input type="text" name="password"><br>
                 <input type="submit">
             </form>
+            <p id="loginReturn">LoginReturn: </p>
         </div>
 
         <div>
@@ -98,10 +99,22 @@
         </div>
 
         <div>
+            <p><br />Vote For Pending Entry</p>
+            <form action="#" onsubmit="return voteForPendingEntry(this);">
+                Pending Entry Id:<input type="text" name="pendingEntryId"><br>
+                Username: <input type="text" name="username"><br>
+                Password: <input type="text" name="password"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
             <p><br />Promote Pending Entry</p>
             <button id="promote-pending-entry-button">Promote Pending Entry!</button>
             <input id="pending-entry-id-to-promote" value="1" />
         </div>
+
+        <p style="display:none" id="loggedInUser"></p>
 
         <hr />
         <footer>

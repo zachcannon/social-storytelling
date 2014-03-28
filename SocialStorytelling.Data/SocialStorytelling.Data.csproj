@@ -64,6 +64,14 @@
     <Compile Include="Migrations\201403271443004_Adding Users.Designer.cs">
       <DependentUpon>201403271443004_Adding Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403280321560_List of voters in pending entry and number of votes..cs" />
+    <Compile Include="Migrations\201403280321560_List of voters in pending entry and number of votes..Designer.cs">
+      <DependentUpon>201403280321560_List of voters in pending entry and number of votes..cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403280404312_Record who has voted on a story.cs" />
+    <Compile Include="Migrations\201403280404312_Record who has voted on a story.Designer.cs">
+      <DependentUpon>201403280404312_Record who has voted on a story.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PendingEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +94,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403271443004_Adding Users.resx">
       <DependentUpon>201403271443004_Adding Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403280321560_List of voters in pending entry and number of votes..resx">
+      <DependentUpon>201403280321560_List of voters in pending entry and number of votes..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403280404312_Record who has voted on a story.resx">
+      <DependentUpon>201403280404312_Record who has voted on a story.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

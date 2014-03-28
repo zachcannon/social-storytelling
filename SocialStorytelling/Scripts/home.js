@@ -61,6 +61,7 @@ $(document).ready(function () {
             url: "/Home/GetPendingEntryList"
         }).done(printPendingEntryList);
 
+        //-------------------------BUTTON ACTIONS---------------------------
         $('#remove-story-button').click(function () {
             var idToRemove = $('#story-id-to-remove').val().toString();
 
@@ -165,6 +166,19 @@ function addPendingEntry(form) {
     return true;
 };
 
+function voteForPendingEntry(form) {
+    $.ajax({
+        url: "/Home/VoteForPendingEntry",
+        data: {
+            "pendingEntryId": form.pendingEntryId.value,
+            "username": form.username.value,
+            "password": form.password.value
+        }
+    });
+
+    return false;
+}
+
 function registerUser(form) {
     var updateRegisterReturn = function (data) {
         $('#registerReturn').append(data);
@@ -172,17 +186,31 @@ function registerUser(form) {
 
     $.ajax({
         url: "/Home/RegisterNewUser",
+        type: 'POST',
+        data: {
+            "username": form.username.value,
+            "password": form.password.value
+        }        
+    }).done(updateRegisterReturn);
+
+    return false;
+};
+
+function loginUser(form) {
+    var updateLoginReturn = function (data) {
+        $('#loggedInUser').text('');
+        $('#loggedInUser').append(data);
+    };
+
+    $.ajax({
+        url: "/Home/LoginUser",
+        type: 'POST',
         data: {
             "username": form.username.value,
             "password": form.password.value
         }
-    }).done(updateRegisterReturn);
+    }).done(updateLoginReturn);
 
-    return true;
-};
-
-function loginUser(form) {
-    alert("Inside login function");
-    return true;
+    return false;
 };
 

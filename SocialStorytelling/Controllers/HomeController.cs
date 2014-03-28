@@ -18,6 +18,7 @@ namespace SocialStorytelling.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult GetStoryList()
         {
             List<Story> storybook = service.GetStoryBook();
@@ -42,9 +43,17 @@ namespace SocialStorytelling.Controllers
             return Json(pendingEntryList, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public ActionResult RegisterNewUser(string username, string password)
         {
             string returnValue = service.RegisterNewUser(username, password);
+            return Json(returnValue, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult LoginUser(string username, string password)
+        {
+            string returnValue = service.LoginUser(username, password);
             return Json(returnValue, JsonRequestBehavior.AllowGet);
         }
 
@@ -81,6 +90,11 @@ namespace SocialStorytelling.Controllers
         public void PromotePendingEntry(int idToPromote)
         {
             service.PromotePendingEntryFromList(idToPromote);
+        }
+
+        public void VoteForPendingEntry(int pendingEntryId, string username, string password)
+        {
+            service.VoteForPendingEntry(pendingEntryId, username, password);
         }
 
     }
