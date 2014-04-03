@@ -12,6 +12,9 @@ https://tweetinvi.codeplex.com
 Thank you to Daniel Crenna for helping our app talk to twitter:
 https://github.com/danielcrenna/tweetsharp
 
+Thanks to Neil Meredith for help with getting cookies working:
+http://www.codeproject.com/Articles/114478/Twitter-Made-Easy-Post-to-Your-Twitter-Account-wit
+
 ####To-Do
 
 Promote highest pending entry for given story Id
