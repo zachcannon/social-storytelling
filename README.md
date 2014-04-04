@@ -19,8 +19,6 @@ http://www.codeproject.com/Articles/114478/Twitter-Made-Easy-Post-to-Your-Twitte
 
 Promote highest pending entry for given story Id
 
-Store logged in customer in cookie so validation does not occur ever time
-
 Stoty page pending entry vote button - This increments vote counter and retweets
 
 Pending entry - in tweet format
