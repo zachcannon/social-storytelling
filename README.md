@@ -9,7 +9,7 @@ http://james.newtonking.com/archive/2009/07/03/simple-net-profanity-filter
 Thank you to the Tweetinvi team for simplifying how our application talks to twitter:
 https://tweetinvi.codeplex.com
 
-Thank you to Daniel Crenna for helping our app talk to twitter:
+Thank you to Daniel Crenna for helping our app work with twitter Oauth:
 https://github.com/danielcrenna/tweetsharp
 
 Thanks to Neil Meredith for help with getting cookies working:

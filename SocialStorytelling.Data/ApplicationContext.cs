@@ -190,7 +190,7 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public void CastVoteForStoryFromUser(int idToVoteFor, string userWhoIsVoting)
+        public bool CastVoteForStoryFromUser(int idToVoteFor, string userWhoIsVoting)
         {
             using (var db = new ApplicationContext())
             {
@@ -202,7 +202,9 @@ namespace SocialStorytelling.Data
                     pendingEntry.VotesCastForMe++;
 
                     db.SaveChanges();
+                    return true;
                 }
+                return false;
             }
         }
     }

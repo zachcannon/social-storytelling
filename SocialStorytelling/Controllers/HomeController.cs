@@ -96,7 +96,9 @@ namespace SocialStorytelling.Controllers
             if (Request.Cookies[AuthorizedUserCookie] != null)
             {
                 string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-                service.VoteForPendingEntry(pendingEntryId, username);
+                string oauth_token = Request.Cookies[AuthorizedUserCookie]["oauth_token"];
+                string oauth_verifier = Request.Cookies[AuthorizedUserCookie]["oauth_verifier"];
+                service.VoteForPendingEntry(pendingEntryId, username, oauth_token, oauth_verifier);
                 return RedirectToAction("Index");
             }
             else
