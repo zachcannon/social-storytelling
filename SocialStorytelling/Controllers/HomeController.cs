@@ -10,11 +10,16 @@ namespace SocialStorytelling.Controllers
 {
     public class HomeController : Controller
     {
+        private string AuthorizedUserCookie = "TweetAuthCookie";
+
         SocialStorytellingService service = new SocialStorytellingService();
 
         public ActionResult Index()
         {
-            ViewBag.Message = "Message text here";
+            if (Request.Cookies[AuthorizedUserCookie] != null)
+                ViewBag.Username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
+            else
+                ViewBag.Username = "No users logged in yet.";
             return View();
         }
 
@@ -25,18 +30,21 @@ namespace SocialStorytelling.Controllers
             return Json(storybook, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult GetEntryList()
         {
             List<Entry> entryList = service.GetEntryList();
             return Json(entryList, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult GetEntriesForGivenStory(int storyId)
         {
             List<Entry> entryList = service.GetEntriesForGivenStory(storyId);
             return Json(entryList, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult GetPendingEntryList()
         {
             List<PendingEntry> pendingEntryList = service.GetPendingEntryList();
@@ -44,57 +52,65 @@ namespace SocialStorytelling.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterNewUser(string username, string password)
+        public ActionResult AddNewStory(string title, string prompt)
         {
-            string returnValue = service.RegisterNewUser(username, password);
-            return Json(returnValue, JsonRequestBehavior.AllowGet);
+            service.AddNewStoryToBook(title, prompt);
+            return RedirectToAction("Index");
+        }
+        
+        [HttpPost]
+        public ActionResult AddNewEntry(string text, string author, int storyId)
+        {
+            service.AddEntryToStory(storyId, author, text);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult LoginUser(string username, string password)
-        {
-            string returnValue = service.LoginUser(username, password);
-            return Json(returnValue, JsonRequestBehavior.AllowGet);
-        }
-
-        public void AddNewStory(string title, string prompt)
-        {
-            service.AddNewStoryToBook(title, prompt);
-        }
-        
-        public void AddNewEntry(string text, string author, int storyId)
-        {
-            service.AddEntryToStory(storyId, author, text);
-        }
-
-        public void AddNewPendingEntry(string text, string author, int storyId)
+        public ActionResult AddNewPendingEntry(string text, string author, int storyId)
         {
             service.AddPendingEntryToList(storyId, author, text);
+            return RedirectToAction("Index");
         }
 
-        public void RemoveStory(int idToRemove)
+        [HttpPost]
+        public ActionResult RemoveStory(int idToRemove)
         {
             service.RemoveStoryFromBook(idToRemove);
+            return RedirectToAction("Index");
         }
       
-        public void RemoveEntry(int idToRemove)
+        [HttpPost]
+        public ActionResult RemoveEntry(int idToRemove)
         {
             service.RemoveEntryFromList(idToRemove);
+            return RedirectToAction("Index");
         }
 
-        public void RemovePendingEntry(int idToRemove)
+        [HttpPost]
+        public ActionResult RemovePendingEntry(int idToRemove)
         {
             service.RemovePendingEntryFromList(idToRemove);
+            return RedirectToAction("Index");
         }
 
-        public void PromotePendingEntry(int idToPromote)
+        [HttpPost]
+        public ActionResult PromotePendingEntry(int idToPromote)
         {
             service.PromotePendingEntryFromList(idToPromote);
+            return RedirectToAction("Index");
         }
 
-        public void VoteForPendingEntry(int pendingEntryId, string username, string password)
+        [HttpPost]
+        public ActionResult VoteForPendingEntry(int pendingEntryId)
         {
-            service.VoteForPendingEntry(pendingEntryId, username, password);
+            if (Request.Cookies[AuthorizedUserCookie] != null)
+            {
+                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
+                service.VoteForPendingEntry(pendingEntryId, username);
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Account", "Account");
         }
 
     }

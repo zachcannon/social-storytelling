@@ -137,37 +137,10 @@ namespace SocialStorytelling.Business
             data.RemovePendingEntry(pendingEntryToPromote.id);
         }
 
-        public string RegisterNewUser(string username, string password)
-        {
-            string returnValue = "Cannot Register this username";
-            var user = User.GetUserFromScreenName(username);
-            if (user != null)
-            {
-                ApplicationContext data = new ApplicationContext();
-                returnValue = data.AddNewUser(username, password);
-            }
-            return returnValue;
-        }
-
-        public string LoginUser(string username, string password)
-        {
-            string returnValue = "invalidLogin";
-
-            ApplicationContext data = new ApplicationContext();
-            bool areUsersCredentialsValid = data.LoginUser(username, password);
-
-            if (areUsersCredentialsValid)
-            {
-                returnValue = username;
-            }
-
-            return returnValue;
-        }
-
-        public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string usersPassword)
+        public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting)
         {
             ApplicationContext data = new ApplicationContext();
-            data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting, usersPassword);
+            data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting);
         }
     }
 }

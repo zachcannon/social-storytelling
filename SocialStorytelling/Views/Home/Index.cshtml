@@ -24,28 +24,8 @@
         </div>
 
         <div>
-            <p><br />Register</p>
-            <form action="#" onsubmit="return registerUser(this);">
-                Username:<input type="text" name="username"><br>
-                Password: <input type="text" name="password"><br>
-                <input type="submit">
-            </form>
-            <p id="registerReturn">RegisterReturn: </p>
-        </div>
-            
-        <div>
-            <p><br />Log In</p>
-            <form action="#" onsubmit="return loginUser(this);">
-                Username:<input type="text" name="username"><br>
-                Password: <input type="text" name="password"><br>
-                <input type="submit">
-            </form>
-            <p id="loginReturn">LoginReturn: </p>
-        </div>
-
-        <div>
             <p><br />Add New Story</p>
-            <form action="#" onsubmit="return addStory(this);">
+            <form action="@Url.Action("AddNewStory", "Home")" method="post">
                 Title:<input type="text" name="title"><br>
                 Prompt: <input type="text" name="prompt"><br>
                 <input type="submit">
@@ -54,13 +34,15 @@
 
         <div>
             <p><br />Remove Story</p>
-            <button id="remove-story-button">Remove Story!</button>
-            <input id="story-id-to-remove" value="1" />
+            <form action="@Url.Action("RemoveStory", "Home")" method="post">
+                Id To Remove:<input type="text" name="idToRemove"><br>
+                <input type="submit">
+            </form>
         </div>
 
         <div>
             <p><br />Add New Entry</p>
-            <form action="#" onsubmit="return addEntry(this);">
+            <form action="@Url.Action("AddNewEntry", "Home")" method="post">
                 Text:<input type="text" name="text"><br>
                 Author: <input type="text" name="author"><br>
                 StoryID: <input type="text" name="storyId"><br>
@@ -70,8 +52,10 @@
                 
         <div>
             <p><br />Remove Entry</p>
-            <button id="remove-entry-button">Remove Entry!</button>
-            <input id="entry-id-to-remove" value="1" />
+            <form action="@Url.Action("RemoveEntry", "Home")" method="post">
+                Id To Remove:<input type="text" name="idToRemove"><br>
+                <input type="submit">
+            </form>
         </div>
 
         <div>
@@ -84,7 +68,7 @@
 
         <div>
             <p><br />Add New Pending Entry</p>
-            <form action="#" onsubmit="return addPendingEntry(this);">
+            <form action="@Url.Action("AddNewPendingEntry", "Home")" method="post">
                 Text:<input type="text" name="text"><br>
                 Author: <input type="text" name="author"><br>
                 StoryID: <input type="text" name="storyId"><br>
@@ -94,24 +78,26 @@
 
         <div>
             <p><br />Remove Pending Entry</p>
-            <button id="remove-pending-entry-button">Remove Pending Entry!</button>
-            <input id="pending-entry-id-to-remove" value="1" />
+            <form action="@Url.Action("RemovePendingEntry", "Home")" method="post">
+                Id To Remove:<input type="text" name="idToRemove"><br>
+                <input type="submit">
+            </form>
         </div>
 
         <div>
             <p><br />Vote For Pending Entry</p>
-            <form action="#" onsubmit="return voteForPendingEntry(this);">
+            <form action="@Url.Action("VoteForPendingEntry", "Home")" method="post">
                 Pending Entry Id:<input type="text" name="pendingEntryId"><br>
-                Username: <input type="text" name="username"><br>
-                Password: <input type="text" name="password"><br>
                 <input type="submit">
             </form>
         </div>
 
         <div>
             <p><br />Promote Pending Entry</p>
-            <button id="promote-pending-entry-button">Promote Pending Entry!</button>
-            <input id="pending-entry-id-to-promote" value="1" />
+            <form action="@Url.Action("PromotePendingEntry", "Home")" method="post">
+                Pending Entry Id:<input type="text" name="idToPromote"><br>
+                <input type="submit">
+            </form>
         </div>
 
         <p style="display:none" id="loggedInUser"></p>

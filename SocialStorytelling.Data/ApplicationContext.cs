@@ -14,7 +14,6 @@ namespace SocialStorytelling.Data
         public DbSet<StoryData> Stories { get; set; }
         public DbSet<EntryData> Entries { get; set; }
         public DbSet<PendingEntryData> PendingEntries { get; set; }
-        public DbSet<UserData> Users { get; set; }
 
         public List<StoryData> GetStories()
         {
@@ -191,47 +190,10 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public string AddNewUser(string username, string password)
-        {
-            string returnMessage = "That user already exists in the database!";
-            UserData newUser = new UserData(username, password);
-
-            using (var db = new ApplicationContext())
-            {
-                var user = db.Users.Find(newUser.username);
-                if (user == null)
-                {
-                    db.Users.Add(newUser);
-                    db.SaveChanges();
-                    returnMessage = "Added the user: " + newUser.username + " to the database.";
-                }
-            }
-
-            return returnMessage;
-        }
-
-        public bool LoginUser(string username, string password)
+        public void CastVoteForStoryFromUser(int idToVoteFor, string userWhoIsVoting)
         {
             using (var db = new ApplicationContext())
             {
-                var user = db.Users.Find(username);
-                if (user != null)
-                {
-                    if (user.password.Equals(password))
-                        return true;
-                }                
-                return false;
-            }
-        }
-
-        public void CastVoteForStoryFromUser(int idToVoteFor, string userWhoIsVoting, string usersPassword)
-        {
-            using (var db = new ApplicationContext())
-            {
-                var user = db.Users.Find(userWhoIsVoting);
-                if (user == null || !user.password.Equals(usersPassword))
-                    return;
-
                 var pendingEntry = db.PendingEntries.Find(idToVoteFor);
                 
                 if (!pendingEntry.Voters.Contains(userWhoIsVoting))
