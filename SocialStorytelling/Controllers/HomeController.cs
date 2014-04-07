@@ -54,52 +54,42 @@ namespace SocialStorytelling.Controllers
         [HttpPost]
         public ActionResult AddNewStory(string title, string prompt)
         {
-            service.AddNewStoryToBook(title, prompt);
-            return RedirectToAction("Index");
+            if (Request.Cookies[AuthorizedUserCookie] != null)
+            {
+                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
+                service.AddNewStoryToBook(title, prompt);
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Account", "Account");
         }
         
         [HttpPost]
-        public ActionResult AddNewEntry(string text, string author, int storyId)
+        public ActionResult AddNewEntry(string text, int storyId)
         {
-            service.AddEntryToStory(storyId, author, text);
-            return RedirectToAction("Index");
+            if (Request.Cookies[AuthorizedUserCookie] != null)
+            {
+                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
+                service.AddEntryToStory(storyId, username, text);
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Account", "Account");
         }
 
         [HttpPost]
-        public ActionResult AddNewPendingEntry(string text, string author, int storyId)
+        public ActionResult AddNewPendingEntry(string text, int storyId)
         {
-            service.AddPendingEntryToList(storyId, author, text);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult RemoveStory(int idToRemove)
-        {
-            service.RemoveStoryFromBook(idToRemove);
-            return RedirectToAction("Index");
+            if (Request.Cookies[AuthorizedUserCookie] != null)
+            {
+                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
+                service.AddPendingEntryToList(storyId, username, text);
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Account", "Account");
         }
       
-        [HttpPost]
-        public ActionResult RemoveEntry(int idToRemove)
-        {
-            service.RemoveEntryFromList(idToRemove);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult RemovePendingEntry(int idToRemove)
-        {
-            service.RemovePendingEntryFromList(idToRemove);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult PromotePendingEntry(int idToPromote)
-        {
-            service.PromotePendingEntryFromList(idToPromote);
-            return RedirectToAction("Index");
-        }
-
         [HttpPost]
         public ActionResult VoteForPendingEntry(int pendingEntryId)
         {
@@ -111,6 +101,36 @@ namespace SocialStorytelling.Controllers
             }
             else
                 return RedirectToAction("Account", "Account");
+        }
+
+        //--------------ADMIN COMMANDS----------------
+
+        [HttpPost]
+        public ActionResult PromotePendingEntry(int idToPromote)
+        {
+            service.PromotePendingEntryFromList(idToPromote);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult RemovePendingEntry(int idToRemove)
+        {
+            service.RemovePendingEntryFromList(idToRemove);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveStory(int idToRemove)
+        {
+            service.RemoveStoryFromBook(idToRemove);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveEntry(int idToRemove)
+        {
+            service.RemoveEntryFromList(idToRemove);
+            return RedirectToAction("Index");
         }
 
     }
