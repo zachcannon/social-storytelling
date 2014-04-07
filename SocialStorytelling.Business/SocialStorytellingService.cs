@@ -12,8 +12,8 @@ namespace SocialStorytelling.Business
     public class SocialStorytellingService
     {
 
-        private string ConsumerKey = "lgs8hg45HbaaLkkKFHDbzQ";
-        private string ConsumerSecret = "JiaTz1ixrFdmFigEXalqZP2xL00c3EscVldyndvWI";
+        private string ConsumerKey = "qNLcTNRZVCYvzktylhw";
+        private string ConsumerSecret = "6mbLcXOiaZT2kMMjdqxQ2CTrSsdbkJvpcGKrduoBxk";
 
         public List<Story> GetStoryBook()
         {
@@ -132,13 +132,13 @@ namespace SocialStorytelling.Business
             data.RemovePendingEntry(pendingEntryToPromote.id);
         }
 
-        public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string oauth_token, string oauth_verifier)
+        public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string access_token, string access_verifier)
         {
             ApplicationContext data = new ApplicationContext();
             if(data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting))
             {
-                TwitterCredentials.SetCredentials(oauth_token, oauth_verifier, ConsumerKey, ConsumerSecret);
-                Tweet.PublishTweet("publishd new pending entry with tweetinvi");
+                TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);                
+                Tweet.PublishTweet("I just voted for pending entry number: "+idToVoteFor+" on Social Storytelling!");
             }
         }
     }

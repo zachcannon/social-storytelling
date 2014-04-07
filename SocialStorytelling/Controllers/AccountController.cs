@@ -10,8 +10,8 @@ namespace SocialStorytelling.Controllers
     public class AccountController : Controller
     {
         private string AuthorizedUserCookie = "TweetAuthCookie";
-        private string ConsumerKey = "lgs8hg45HbaaLkkKFHDbzQ";
-        private string ConsumerSecret = "JiaTz1ixrFdmFigEXalqZP2xL00c3EscVldyndvWI";
+        private string ConsumerKey = "qNLcTNRZVCYvzktylhw";
+        private string ConsumerSecret = "6mbLcXOiaZT2kMMjdqxQ2CTrSsdbkJvpcGKrduoBxk";
 
         public ActionResult Account()
         {
@@ -58,10 +58,8 @@ namespace SocialStorytelling.Controllers
             //Save into cookie
             HttpCookie userCookie = new HttpCookie(AuthorizedUserCookie);
             userCookie.Expires = DateTime.Now.AddDays(1);
-            userCookie["consumer_key"] = ConsumerKey;
-            userCookie["consumer_secret"] = ConsumerSecret;
-            userCookie["oauth_token"] = oauth_token;
-            userCookie["oauth_verifier"] = oauth_verifier;
+            userCookie["access_token"] = accessToken.Token;
+            userCookie["access_verifier"] = accessToken.TokenSecret;
             userCookie["screen_name"] = user.ScreenName;
 
             Response.Cookies.Add(userCookie);
