@@ -20,5 +20,3 @@ http://www.codeproject.com/Articles/114478/Twitter-Made-Easy-Post-to-Your-Twitte
 Promote highest pending entry for given story Id
 
 Pending entry - in tweet format
-
-Close story after x entries

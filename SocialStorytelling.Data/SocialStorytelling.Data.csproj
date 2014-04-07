@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201404041542067_Fix Change.Designer.cs">
       <DependentUpon>201404041542067_Fix Change.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404071608135_AddStoryClosed.cs" />
+    <Compile Include="Migrations\201404071608135_AddStoryClosed.Designer.cs">
+      <DependentUpon>201404071608135_AddStoryClosed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PendingEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404041542067_Fix Change.resx">
       <DependentUpon>201404041542067_Fix Change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404071608135_AddStoryClosed.resx">
+      <DependentUpon>201404071608135_AddStoryClosed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -98,19 +98,25 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public void AddEntryToDb(int entryId, string text, string author, int storyContainerId)
+        public int AddEntryToDb(int entryId, string text, string author, int storyContainerId)
         {
             EntryData entry = new EntryData(entryId, text, author);
 
             using (var db = new ApplicationContext())
             {
                 var story = db.Stories.Find(storyContainerId);
-                entry.Story = story;
-                story.Entries.Add(entry);
 
-                db.Entries.Add(entry);
+                if (!story.StoryClosed)
+                {
+                    entry.Story = story;
+                    story.Entries.Add(entry);
 
-                db.SaveChanges();
+                    db.Entries.Add(entry);
+
+                    db.SaveChanges();
+                    return story.Entries.Count();
+                }
+                return 0;
             }
         }
 
@@ -122,7 +128,7 @@ namespace SocialStorytelling.Data
             {
                 var story = db.Stories.Find(storyId);
 
-                if (story != null)
+                if (story != null && !story.StoryClosed)
                 {
                     db.PendingEntries.Add(entry);
                     db.SaveChanges();
@@ -205,6 +211,16 @@ namespace SocialStorytelling.Data
                     return true;
                 }
                 return false;
+            }
+        }
+
+        public void CloseStory(int storyIdToClose)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var storyToClose = db.Stories.Find(storyIdToClose);
+                storyToClose.StoryClosed = true;
+                db.SaveChanges();
             }
         }
     }

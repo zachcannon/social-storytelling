@@ -11,6 +11,7 @@ namespace SocialStorytelling.Data
         public int id { get; set; }
         public string Title { get; set; }
         public string Prompt { get; set; }
+        public bool StoryClosed { get; set; }
         public virtual List<EntryData> Entries { get; set; }
 
         public StoryData() {}
@@ -20,6 +21,7 @@ namespace SocialStorytelling.Data
             this.id = id;
             this.Title = title;
             this.Prompt = prompt;
+            this.StoryClosed = false;
         }
     }
 }

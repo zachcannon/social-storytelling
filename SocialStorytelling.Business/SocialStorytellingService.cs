@@ -11,13 +11,14 @@ namespace SocialStorytelling.Business
 {
     public class SocialStorytellingService
     {
+        private int MaximumNumberOfEntriesInAStory = 5;
 
         private string ConsumerKey = "qNLcTNRZVCYvzktylhw";
         private string ConsumerSecret = "6mbLcXOiaZT2kMMjdqxQ2CTrSsdbkJvpcGKrduoBxk";
+        private ApplicationContext data = new ApplicationContext();
 
         public List<Story> GetStoryBook()
-        {
-            ApplicationContext data = new ApplicationContext();
+        {            
 
             List<StoryData> storyData = data.GetStories();
 
@@ -32,8 +33,6 @@ namespace SocialStorytelling.Business
 
         public List<Entry> GetEntryList()
         {
-            ApplicationContext data = new ApplicationContext();
-
             List<EntryData> entryData = data.GetEntries();
 
             List<Entry> entryList = new List<Entry>();
@@ -47,7 +46,6 @@ namespace SocialStorytelling.Business
 
         public List<Entry> GetEntriesForGivenStory(int storyId)
         {
-            ApplicationContext data = new ApplicationContext();
             List<EntryData> entryData = data.GetEntriesForStoryFromDb(storyId);
 
             List<Entry> entryList = new List<Entry>();
@@ -61,8 +59,6 @@ namespace SocialStorytelling.Business
 
         public List<PendingEntry> GetPendingEntryList()
         {
-            ApplicationContext data = new ApplicationContext();
-
             List<PendingEntryData> pendingEntryData = data.GetPendingEntries();
 
             List<PendingEntry> entryList = new List<PendingEntry>();
@@ -80,7 +76,6 @@ namespace SocialStorytelling.Business
             title = censor.CensorText(title);
             prompt = censor.CensorText(prompt);
 
-            ApplicationContext data = new ApplicationContext();
             data.AddStoryToDb(new StoryData(1, title, prompt));
         }
 
@@ -90,8 +85,11 @@ namespace SocialStorytelling.Business
             author = censor.CensorText(author);
             text = censor.CensorText(text);
 
-            ApplicationContext data = new ApplicationContext();
-            data.AddEntryToDb(1, text, author, storyId);
+            int numberOfEntriesInStory = data.AddEntryToDb(1, text, author, storyId);
+            if (numberOfEntriesInStory >= MaximumNumberOfEntriesInAStory)
+            {
+                data.CloseStory(storyId);
+            }
         }
 
         public void AddPendingEntryToList(int storyId, string author, string text)
@@ -100,32 +98,26 @@ namespace SocialStorytelling.Business
             author = censor.CensorText(author);
             text = censor.CensorText(text);
 
-            ApplicationContext data = new ApplicationContext();
             data.AddPendingEntryToDb(1, text, author, storyId);
         }
 
         public void RemoveStoryFromBook(int idToRemove)
         {
-            ApplicationContext data = new ApplicationContext();
             data.RemoveStory(idToRemove);
         }
 
         public void RemoveEntryFromList(int idToRemove)
         {
-            ApplicationContext data = new ApplicationContext();
             data.RemoveEntry(idToRemove);
         }
 
         public void RemovePendingEntryFromList(int idToRemove)
         {
-            ApplicationContext data = new ApplicationContext();
             data.RemovePendingEntry(idToRemove);
         }
 
         public void PromotePendingEntryFromList(int idToPromote)
         {
-            ApplicationContext data = new ApplicationContext();
-
             PendingEntryData pendingEntryToPromote = data.GetPendingEntryById(idToPromote);
 
             AddEntryToStory(pendingEntryToPromote.StoryIBelongTo, pendingEntryToPromote.Author, pendingEntryToPromote.Text);
@@ -134,12 +126,16 @@ namespace SocialStorytelling.Business
 
         public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string access_token, string access_verifier)
         {
-            ApplicationContext data = new ApplicationContext();
             if(data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting))
             {
                 TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);                
                 Tweet.PublishTweet("I just voted for pending entry number: "+idToVoteFor+" on Social Storytelling!");
             }
+        }
+
+        public void CloseAStory(int storyIdToClose)
+        {
+            data.CloseStory(storyIdToClose);
         }
     }
 }

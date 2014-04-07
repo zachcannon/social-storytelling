@@ -135,5 +135,11 @@ namespace SocialStorytelling.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult CloseStory(int idToClose)
+        {
+            service.CloseAStory(idToClose);
+            return RedirectToAction("Index");
+        }
     }
 }
