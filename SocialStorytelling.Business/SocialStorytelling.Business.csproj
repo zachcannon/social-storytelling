@@ -55,7 +55,6 @@
     <Compile Include="Story.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entry.cs" />
-    <Compile Include="StoryBook.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SocialStorytelling.Data\SocialStorytelling.Data.csproj">
