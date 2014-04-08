@@ -56,7 +56,9 @@ namespace SocialStorytelling.Controllers
             if (Request.Cookies[AuthorizedUserCookie] != null)
             {
                 string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-                service.AddNewStoryToBook(title, prompt);
+                string access_token = Request.Cookies[AuthorizedUserCookie]["access_token"];
+                string access_verifier = Request.Cookies[AuthorizedUserCookie]["access_verifier"];
+                service.AddNewStoryToBook(title, prompt, access_token, access_verifier);
                 return RedirectToAction("Index");
             }
             else
@@ -69,7 +71,9 @@ namespace SocialStorytelling.Controllers
             if (Request.Cookies[AuthorizedUserCookie] != null)
             {
                 string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-                service.AddPendingEntryToList(storyId, username, text);
+                string access_token = Request.Cookies[AuthorizedUserCookie]["access_token"];
+                string access_verifier = Request.Cookies[AuthorizedUserCookie]["access_verifier"];
+                service.AddPendingEntryToList(storyId, username, text, access_token, access_verifier);
                 return RedirectToAction("Index");
             }
             else

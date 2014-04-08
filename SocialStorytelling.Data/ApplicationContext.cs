@@ -10,7 +10,6 @@ namespace SocialStorytelling.Data
     public class ApplicationContext : DbContext
     {
         public ApplicationContext() {}
-
         public DbSet<StoryData> Stories { get; set; }
         public DbSet<EntryData> Entries { get; set; }
         public DbSet<PendingEntryData> PendingEntries { get; set; }
@@ -79,22 +78,21 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public void AddStoryToDb(StoryData newStory)
+        public bool AddStoryToDb(StoryData newStory)
         {
             using (var db = new ApplicationContext())
             {
-
                 var story = db.Stories.Find(newStory.id);
 
                 if (story == null)
                 {
                     db.Stories.Add(newStory);
                     db.SaveChanges();
+
+                    return true;
                 }
-                else
-                {
-                    db.Entry(story).CurrentValues.SetValues(newStory);
-                }
+
+                return false;
             }
         }
 
@@ -120,9 +118,9 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public void AddPendingEntryToDb(int entryId, string text, string author, int storyId)
+        public bool AddPendingEntryToDb(string text, string author, int storyId)
         {
-            PendingEntryData entry = new PendingEntryData(entryId, text, author, storyId);
+            PendingEntryData entry = new PendingEntryData(1, text, author, storyId);
 
             using (var db = new ApplicationContext())
             {
@@ -132,7 +130,11 @@ namespace SocialStorytelling.Data
                 {
                     db.PendingEntries.Add(entry);
                     db.SaveChanges();
-                }              
+
+                    return true;
+                }
+
+                return false;
             }
         }
 

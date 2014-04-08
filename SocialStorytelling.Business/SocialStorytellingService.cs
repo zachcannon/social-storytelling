@@ -70,23 +70,33 @@ namespace SocialStorytelling.Business
         }
 
         //----------------------USER COMMANDS---------------------
-        
-        public void AddNewStoryToBook(string title, string prompt)
+
+        public void AddNewStoryToBook(string title, string prompt, string access_token, string access_verifier)
         {
             Censor censor = new Censor();
             title = censor.CensorText(title);
             prompt = censor.CensorText(prompt);
 
-            data.AddStoryToDb(new StoryData(1, title, prompt));
+            if(data.AddStoryToDb(new StoryData(1, title, prompt)))
+            {
+                TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
+                Tweet.PublishTweet("I just posted a new story titled: " + title + " on Social Storytelling!");
+            }
+
+            
         }
 
-        public void AddPendingEntryToList(int storyId, string author, string text)
+        public void AddPendingEntryToList(int storyId, string author, string text, string access_token, string access_verifier)
         {
             Censor censor = new Censor();
             author = censor.CensorText(author);
             text = censor.CensorText(text);
 
-            data.AddPendingEntryToDb(1, text, author, storyId);
+            if(data.AddPendingEntryToDb(text, author, storyId))
+            {
+                TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
+                Tweet.PublishTweet("I just posted a new pending entry: " + text + " on Social Storytelling!");
+            }
         }
 
         public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string access_token, string access_verifier)
