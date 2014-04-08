@@ -14,6 +14,14 @@ namespace SocialStorytelling.Business
         private int MaximumNumberOfEntriesInAStory = 5;
         private string ConsumerKey = "qNLcTNRZVCYvzktylhw";
         private string ConsumerSecret = "6mbLcXOiaZT2kMMjdqxQ2CTrSsdbkJvpcGKrduoBxk";
+
+        /// <summary>
+        /// Use the following command to set SocialStorytell as the current user. 
+        /// TwitterCredentials.SetCredentials(SocialStorytellAccessToken, SocialStorytellAccessVerifier, ConsumerKey, ConsumerSecret);
+        /// </summary>
+        private string SocialStorytellAccessToken = "2432975197-51sydYraQHzb3y8sFN7e4m3thKaqfQfWbrhSdi4";
+        private string SocialStorytellAccessVerifier = "ykaW5iQKJ7N6KsVQ0d1zWEYSqG1VH57u42bTbR7BTlfXL";
+
         private ApplicationContext data = new ApplicationContext();
 
         public List<Story> GetStoryBook()
