@@ -11,7 +11,6 @@ namespace SocialStorytelling.Controllers
     public class HomeController : Controller
     {
         private string AuthorizedUserCookie = "TweetAuthCookie";
-
         SocialStorytellingService service = new SocialStorytellingService();
 
         public ActionResult Index()
@@ -63,19 +62,6 @@ namespace SocialStorytelling.Controllers
             else
                 return RedirectToAction("Account", "Account");
         }
-        
-        [HttpPost]
-        public ActionResult AddNewEntry(string text, int storyId)
-        {
-            if (Request.Cookies[AuthorizedUserCookie] != null)
-            {
-                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-                service.AddEntryToStory(storyId, username, text);
-                return RedirectToAction("Index");
-            }
-            else
-                return RedirectToAction("Account", "Account");
-        }
 
         [HttpPost]
         public ActionResult AddNewPendingEntry(string text, int storyId)
@@ -106,6 +92,19 @@ namespace SocialStorytelling.Controllers
         }
 
         //--------------ADMIN COMMANDS----------------
+
+        [HttpPost]
+        public ActionResult AddNewEntry(string text, int storyId)
+        {
+            if (Request.Cookies[AuthorizedUserCookie] != null)
+            {
+                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
+                service.AddEntryToStory(storyId, username, text);
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Account", "Account");
+        }
 
         [HttpPost]
         public ActionResult PromotePendingEntry(int idToPromote)

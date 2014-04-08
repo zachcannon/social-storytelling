@@ -12,7 +12,6 @@ namespace SocialStorytelling.Business
     public class SocialStorytellingService
     {
         private int MaximumNumberOfEntriesInAStory = 5;
-
         private string ConsumerKey = "qNLcTNRZVCYvzktylhw";
         private string ConsumerSecret = "6mbLcXOiaZT2kMMjdqxQ2CTrSsdbkJvpcGKrduoBxk";
         private ApplicationContext data = new ApplicationContext();
@@ -70,6 +69,8 @@ namespace SocialStorytelling.Business
             return entryList;
         }
 
+        //----------------------USER COMMANDS---------------------
+        
         public void AddNewStoryToBook(string title, string prompt)
         {
             Censor censor = new Censor();
@@ -78,6 +79,26 @@ namespace SocialStorytelling.Business
 
             data.AddStoryToDb(new StoryData(1, title, prompt));
         }
+
+        public void AddPendingEntryToList(int storyId, string author, string text)
+        {
+            Censor censor = new Censor();
+            author = censor.CensorText(author);
+            text = censor.CensorText(text);
+
+            data.AddPendingEntryToDb(1, text, author, storyId);
+        }
+
+        public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string access_token, string access_verifier)
+        {
+            if (data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting))
+            {
+                TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
+                Tweet.PublishTweet("I just voted for pending entry number: " + idToVoteFor + " on Social Storytelling!");
+            }
+        }
+        
+        //---------------------ADMIN COMMANDS-------------------
 
         public void AddEntryToStory(int storyId, string author, string text)
         {
@@ -91,16 +112,7 @@ namespace SocialStorytelling.Business
                 data.CloseStory(storyId);
             }
         }
-
-        public void AddPendingEntryToList(int storyId, string author, string text)
-        {
-            Censor censor = new Censor();
-            author = censor.CensorText(author);
-            text = censor.CensorText(text);
-
-            data.AddPendingEntryToDb(1, text, author, storyId);
-        }
-
+        
         public void RemoveStoryFromBook(int idToRemove)
         {
             data.RemoveStory(idToRemove);
@@ -122,15 +134,6 @@ namespace SocialStorytelling.Business
 
             AddEntryToStory(pendingEntryToPromote.StoryIBelongTo, pendingEntryToPromote.Author, pendingEntryToPromote.Text);
             data.RemovePendingEntry(pendingEntryToPromote.id);
-        }
-
-        public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string access_token, string access_verifier)
-        {
-            if(data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting))
-            {
-                TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);                
-                Tweet.PublishTweet("I just voted for pending entry number: "+idToVoteFor+" on Social Storytelling!");
-            }
         }
 
         public void CloseAStory(int storyIdToClose)

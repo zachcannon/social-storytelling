@@ -33,15 +33,6 @@
         </div>
 
         <div>
-            <p><br />Add New Entry</p>
-            <form action="@Url.Action("AddNewEntry", "Home")" method="post">
-                Text:<input type="text" name="text"><br>
-                StoryID: <input type="text" name="storyId"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
             <p><br />Add New Pending Entry</p>
             <form action="@Url.Action("AddNewPendingEntry", "Home")" method="post">
                 Text:<input type="text" name="text"><br>
@@ -62,6 +53,16 @@
             <p>
                 <br/> ----------------------ADMIN COMMANDS BELOW---------------------------
             </p>
+        </div>
+
+
+        <div>
+            <p><br />Add New Entry</p>
+            <form action="@Url.Action("AddNewEntry", "Home")" method="post">
+                Text:<input type="text" name="text"><br>
+                StoryID: <input type="text" name="storyId"><br>
+                <input type="submit">
+            </form>
         </div>
 
         <div>
