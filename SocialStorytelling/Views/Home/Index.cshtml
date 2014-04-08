@@ -112,6 +112,14 @@
             </form>
         </div>
 
+        <div>
+            <p><br />Promote Highest Pending Entry for Given Story</p>
+            <form action="@Url.Action("PromoteHighestPendingEntry", "Home")" method="post">
+                Story Id:<input type="text" name="idToPromote"><br>
+                <input type="submit">
+            </form>
+        </div>
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

@@ -137,5 +137,32 @@ namespace SocialStorytelling.Business
         {
             data.CloseStory(storyIdToClose);
         }
+
+        public void PromoteMostPopularPendingEntry(int idToPromote)
+        {
+            List<PendingEntryData> pendingEntriesForStory = data.GetPendingEntriesForStoryFromDb(idToPromote);
+
+            int pendingIdToPromote = -1;
+            int highestCount = 0;
+
+            foreach(PendingEntryData entry in pendingEntriesForStory)
+            {
+                if (entry.VotesCastForMe >= highestCount)
+                {
+                    highestCount = entry.VotesCastForMe;
+                    pendingIdToPromote = entry.id;
+                }
+                    
+            }
+
+            PromotePendingEntryFromList(pendingIdToPromote);
+
+            foreach (PendingEntryData entry in pendingEntriesForStory)
+            {
+                if (entry.id != pendingIdToPromote)
+                    RemovePendingEntryFromList(entry.id);
+            }
+
+        }
     }
 }

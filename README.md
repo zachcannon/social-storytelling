@@ -17,6 +17,4 @@ http://www.codeproject.com/Articles/114478/Twitter-Made-Easy-Post-to-Your-Twitte
 
 ####To-Do
 
-Promote highest pending entry for given story Id
-
 Pending entry - in tweet format

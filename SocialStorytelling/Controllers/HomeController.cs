@@ -115,6 +115,13 @@ namespace SocialStorytelling.Controllers
         }
 
         [HttpPost]
+        public ActionResult PromoteHighestPendingEntry(int idToPromote)
+        {
+            service.PromoteMostPopularPendingEntry(idToPromote);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public ActionResult RemovePendingEntry(int idToRemove)
         {
             service.RemovePendingEntryFromList(idToRemove);
