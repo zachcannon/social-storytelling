@@ -27,28 +27,7 @@ namespace SocialStorytelling.Controllers
         {
             List<Story> storybook = service.GetStoryBook();
             return Json(storybook, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public ActionResult GetEntryList()
-        {
-            List<Entry> entryList = service.GetEntryList();
-            return Json(entryList, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public ActionResult GetEntriesForGivenStory(int storyId)
-        {
-            List<Entry> entryList = service.GetEntriesForGivenStory(storyId);
-            return Json(entryList, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public ActionResult GetPendingEntryList()
-        {
-            List<PendingEntry> pendingEntryList = service.GetPendingEntryList();
-            return Json(pendingEntryList, JsonRequestBehavior.AllowGet);
-        }
+        }        
 
         [HttpPost]
         public ActionResult AddNewStory(string title, string prompt)
@@ -64,86 +43,18 @@ namespace SocialStorytelling.Controllers
             else
                 return RedirectToAction("Authorize", "Account");
         }
-
-        [HttpPost]
-        public ActionResult AddNewPendingEntry(string text, int storyId)
-        {
-            if (Request.Cookies[AuthorizedUserCookie] != null)
-            {
-                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-                string access_token = Request.Cookies[AuthorizedUserCookie]["access_token"];
-                string access_verifier = Request.Cookies[AuthorizedUserCookie]["access_verifier"];
-                service.AddPendingEntryToList(storyId, username, text, access_token, access_verifier);
-                return RedirectToAction("Index");
-            }
-            else
-                return RedirectToAction("Authorize", "Account");
-        }
-      
-        [HttpPost]
-        public ActionResult VoteForPendingEntry(int pendingEntryId)
-        {
-            if (Request.Cookies[AuthorizedUserCookie] != null)
-            {
-                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-                string access_token = Request.Cookies[AuthorizedUserCookie]["access_token"];
-                string access_verifier = Request.Cookies[AuthorizedUserCookie]["access_verifier"];
-                service.VoteForPendingEntry(pendingEntryId, username, access_token, access_verifier);
-                return RedirectToAction("Index");
-            }
-            else
-                return RedirectToAction("Authorize", "Account");
-        }
-
+        
+        
         //--------------ADMIN COMMANDS----------------
 
-        [HttpPost]
-        public ActionResult AddNewEntry(string text, int storyId)
-        {
-            if (Request.Cookies[AuthorizedUserCookie] != null)
-            {
-                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-                service.AddEntryToStory(storyId, username, text);
-                return RedirectToAction("Index");
-            }
-            else
-                return RedirectToAction("Authorize", "Account");
-        }
-
-        [HttpPost]
-        public ActionResult PromotePendingEntry(int idToPromote)
-        {
-            service.PromotePendingEntryFromList(idToPromote);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult PromoteHighestPendingEntry(int idToPromote)
-        {
-            service.PromoteMostPopularPendingEntry(idToPromote);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult RemovePendingEntry(int idToRemove)
-        {
-            service.RemovePendingEntryFromList(idToRemove);
-            return RedirectToAction("Index");
-        }
+        
 
         [HttpPost]
         public ActionResult RemoveStory(int idToRemove)
         {
             service.RemoveStoryFromBook(idToRemove);
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult RemoveEntry(int idToRemove)
-        {
-            service.RemoveEntryFromList(idToRemove);
-            return RedirectToAction("Index");
-        }
+        }        
 
         [HttpPost]
         public ActionResult CloseStory(int idToClose)

@@ -19,8 +19,6 @@
     <div class="container body-content">
         <div class="jumbotron">
             <p id="storycontainer">STORIES: <br></p>
-            <p id="entrycontainer">ENTRIES: <br></p>
-            <p id="pendingentrycontainer">PENDING ENTRIES: <br></p>
         </div>
 
         <div>
@@ -33,36 +31,9 @@
         </div>
 
         <div>
-            <p><br />Add New Pending Entry</p>
-            <form action="@Url.Action("AddNewPendingEntry", "Home")" method="post">
-                Text:<input type="text" name="text"><br>
-                StoryID: <input type="text" name="storyId"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Vote For Pending Entry</p>
-            <form action="@Url.Action("VoteForPendingEntry", "Home")" method="post">
-                Pending Entry Id:<input type="text" name="pendingEntryId"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
             <p>
                 <br/> ----------------------ADMIN COMMANDS BELOW---------------------------
             </p>
-        </div>
-
-
-        <div>
-            <p><br />Add New Entry</p>
-            <form action="@Url.Action("AddNewEntry", "Home")" method="post">
-                Text:<input type="text" name="text"><br>
-                StoryID: <input type="text" name="storyId"><br>
-                <input type="submit">
-            </form>
         </div>
 
         <div>
@@ -80,47 +51,7 @@
                 <input type="submit">
             </form>
         </div>
-                
-        <div>
-            <p><br />Remove Entry</p>
-            <form action="@Url.Action("RemoveEntry", "Home")" method="post">
-                Id To Remove:<input type="text" name="idToRemove"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Specific Entry #</p>
-            <button id="choose-story-button">Choose Story: </button>
-            <input id="choose-story-id" value="1" />
-
-            <p id="specific-entries">Specific Entries<br /></p>
-        </div>
-
-        <div>
-            <p><br />Remove Pending Entry</p>
-            <form action="@Url.Action("RemovePendingEntry", "Home")" method="post">
-                Id To Remove:<input type="text" name="idToRemove"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Promote Pending Entry</p>
-            <form action="@Url.Action("PromotePendingEntry", "Home")" method="post">
-                Pending Entry Id:<input type="text" name="idToPromote"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Promote Highest Pending Entry for Given Story</p>
-            <form action="@Url.Action("PromoteHighestPendingEntry", "Home")" method="post">
-                Story Id:<input type="text" name="idToPromote"><br>
-                <input type="submit">
-            </form>
-        </div>
-
+              
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
