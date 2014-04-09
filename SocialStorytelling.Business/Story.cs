@@ -11,13 +11,15 @@ namespace SocialStorytelling.Business
         public int Id { get; set; }
         public string Title { get; set; }
         public string Prompt { get; set; }
+        public bool StoryClosed { get; set; }
         public List<Entry> StoryEntries { get; set; }
 
-        public Story(int storyId, string storyTitle, string prompt)
+        public Story(int storyId, string storyTitle, string prompt, bool storyClosed)
         {   
             this.Id = storyId;
             this.Title = storyTitle;
             this.Prompt = prompt;
+            this.StoryClosed = storyClosed;
         }
 
         public int GetNumberOfStoryEntries()

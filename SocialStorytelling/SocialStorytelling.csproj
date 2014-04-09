@@ -254,10 +254,6 @@
       <Project>{d600105e-2617-4b79-94fb-fddde280ac52}</Project>
       <Name>SocialStorytelling.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SocialStorytelling.Data\SocialStorytelling.Data.csproj">
-      <Project>{2112bdce-9d16-4b3c-b3da-01798eee5fdf}</Project>
-      <Name>SocialStorytelling.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

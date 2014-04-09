@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SocialStorytelling.Business;
-using SocialStorytelling.Data;
 
 namespace SocialStorytelling.Controllers
 {

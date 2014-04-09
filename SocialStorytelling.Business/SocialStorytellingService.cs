@@ -32,7 +32,7 @@ namespace SocialStorytelling.Business
             List<Story> storyBook = new List<Story>();
             foreach (StoryData story in storyData)
             {
-                storyBook.Add(new Story(story.id, story.Title, story.Prompt));
+                storyBook.Add(new Story(story.id, story.Title, story.Prompt, story.StoryClosed));
             }
 
             return storyBook;
