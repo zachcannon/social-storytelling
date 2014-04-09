@@ -19,8 +19,8 @@ namespace SocialStorytelling.Business
         /// Use the following command to set SocialStorytell as the current user. 
         /// TwitterCredentials.SetCredentials(SocialStorytellAccessToken, SocialStorytellAccessVerifier, ConsumerKey, ConsumerSecret);
         /// </summary>
-        private string SocialStorytellAccessToken = "2432975197-51sydYraQHzb3y8sFN7e4m3thKaqfQfWbrhSdi4";
-        private string SocialStorytellAccessVerifier = "ykaW5iQKJ7N6KsVQ0d1zWEYSqG1VH57u42bTbR7BTlfXL";
+        private string SocialStorytellAccessToken = "2372951286-8u4NNyblRpippMnlzsbCjf7fcGy6nZqPT0oAQfL";
+        private string SocialStorytellAccessVerifier = "ooWWJsM2Ge1uVeh4dIHxUUj03GbVVr9B0SfXbBb7ysdmI";
 
         private ApplicationContext data = new ApplicationContext();
 
@@ -88,6 +88,9 @@ namespace SocialStorytelling.Business
             if(data.AddStoryToDb(new StoryData(1, title, prompt)))
             {
                 TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
+                Tweet.PublishTweet("I just posted a new story titled: " + title + " on Social Storytelling!");
+
+                TwitterCredentials.SetCredentials(SocialStorytellAccessToken, SocialStorytellAccessVerifier, ConsumerKey, ConsumerSecret);
                 Tweet.PublishTweet("I just posted a new story titled: " + title + " on Social Storytelling!");
             }
 

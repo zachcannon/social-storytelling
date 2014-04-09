@@ -62,7 +62,7 @@ namespace SocialStorytelling.Controllers
                 return RedirectToAction("Index");
             }
             else
-                return RedirectToAction("Account", "Account");
+                return RedirectToAction("Authorize", "Account");
         }
 
         [HttpPost]
@@ -77,7 +77,7 @@ namespace SocialStorytelling.Controllers
                 return RedirectToAction("Index");
             }
             else
-                return RedirectToAction("Account", "Account");
+                return RedirectToAction("Authorize", "Account");
         }
       
         [HttpPost]
@@ -92,7 +92,7 @@ namespace SocialStorytelling.Controllers
                 return RedirectToAction("Index");
             }
             else
-                return RedirectToAction("Account", "Account");
+                return RedirectToAction("Authorize", "Account");
         }
 
         //--------------ADMIN COMMANDS----------------
@@ -107,7 +107,7 @@ namespace SocialStorytelling.Controllers
                 return RedirectToAction("Index");
             }
             else
-                return RedirectToAction("Account", "Account");
+                return RedirectToAction("Authorize", "Account");
         }
 
         [HttpPost]

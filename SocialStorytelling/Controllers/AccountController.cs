@@ -13,20 +13,11 @@ namespace SocialStorytelling.Controllers
         private string ConsumerKey = "qNLcTNRZVCYvzktylhw";
         private string ConsumerSecret = "6mbLcXOiaZT2kMMjdqxQ2CTrSsdbkJvpcGKrduoBxk";
 
-        public ActionResult Account()
-        {
-            if (Request.Cookies[AuthorizedUserCookie] != null)
-                ViewBag.Username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-            else
-                ViewBag.Username = "No users logged in yet.";
-            return View();
-        }
-
         public ActionResult Authorize()
         {
             if (Request.Cookies[AuthorizedUserCookie] != null)
             {
-                return RedirectToAction("Account");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -57,20 +48,20 @@ namespace SocialStorytelling.Controllers
 
             //Save into cookie
             HttpCookie userCookie = new HttpCookie(AuthorizedUserCookie);
-            userCookie.Expires = DateTime.Now.AddDays(1);
+            userCookie.Expires = DateTime.Now.AddHours(1);
             userCookie["access_token"] = accessToken.Token;
             userCookie["access_verifier"] = accessToken.TokenSecret;
             userCookie["screen_name"] = user.ScreenName;
 
             Response.Cookies.Add(userCookie);
 
-            return RedirectToAction("Account");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult LogOutAccount()
         {
             Response.Cookies[AuthorizedUserCookie].Expires = DateTime.Now.AddDays(-2);
-            return RedirectToAction("Account");
+            return RedirectToAction("Index", "Home");
         }
 	}
 }
