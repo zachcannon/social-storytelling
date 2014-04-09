@@ -6,6 +6,8 @@
     <title>Social Storytelling - Collabrative storytelling mechanism</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/navbar-items.js")
 
 </head>
 <body>
@@ -24,9 +26,9 @@
                     <li>@Html.ActionLink("StoryView", "StoryView", "StoryView")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Logged In User: @ViewBag.Username</a></li>
-                    <li>@Html.ActionLink("Login", "Authorize", "Account")</li>
-                    <li>@Html.ActionLink("Logout", "LogOutAccount", "Account")</li>
+                    <li id="accountitem1"><a href="#">Logged In User: @ViewBag.Username</a></li>
+                    <li id="accountitem2">@Html.ActionLink("Login", "Authorize", "Account")</li>
+                    <li id="accountitem3">@Html.ActionLink("Logout", "LogOutAccount", "Account")</li>
                 </ul>
             </div>
             

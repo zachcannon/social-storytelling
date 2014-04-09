@@ -30,11 +30,9 @@ namespace SocialStorytelling.Controllers
 
         public ActionResult AuthorizeCallback(string oauth_token, string oauth_verifier)
         {
-            string returnVal;
             if (oauth_token == null || oauth_verifier == null)
             {
-                returnVal = "Could not log in. OAuth returned null";
-                return RedirectToAction("Account", new { username = returnVal });
+                return RedirectToAction("Index", "Home");
             }
             var requestToken = new OAuthRequestToken { Token = oauth_token };
 
@@ -43,8 +41,6 @@ namespace SocialStorytelling.Controllers
             
             service.AuthenticateWith(accessToken.Token, accessToken.TokenSecret);
             TwitterUser user = service.VerifyCredentials(new VerifyCredentialsOptions());
-
-            returnVal = string.Format("Your username is {0}", user.ScreenName);
 
             //Save into cookie
             HttpCookie userCookie = new HttpCookie(AuthorizedUserCookie);
