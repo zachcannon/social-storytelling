@@ -83,7 +83,7 @@
       <DependentUpon>201404071608135_AddStoryClosed.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="PendingEntry.cs" />
+    <Compile Include="PendingEntryData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoryData.cs" />
   </ItemGroup>

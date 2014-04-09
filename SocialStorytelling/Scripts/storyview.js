@@ -31,7 +31,9 @@ $(document).ready(function () {
             $('#pendingentrycontainer').append("  ");
             $('#pendingentrycontainer').append("Author: "+data.Author);
             $('#pendingentrycontainer').append(" ");            
-            $('#pendingentrycontainer').append("Submit: "+data.SubmissionDate);
+            $('#pendingentrycontainer').append("Submit: " + data.SubmissionDate);
+            $('#pendingentrycontainer').append(" ");
+            $('#pendingentrycontainer').append("Votes: " + data.VotesCastForMe);
             $('#pendingentrycontainer').append("<br>");
         }
 

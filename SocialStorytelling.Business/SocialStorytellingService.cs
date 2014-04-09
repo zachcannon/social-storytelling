@@ -71,7 +71,7 @@ namespace SocialStorytelling.Business
             List<PendingEntry> entryList = new List<PendingEntry>();
             foreach (PendingEntryData entry in pendingEntryData)
             {
-                entryList.Add(new PendingEntry(entry.Text, entry.Author, entry.id, entry.StoryIBelongTo, entry.SubmissionDate));
+                entryList.Add(new PendingEntry(entry.Text, entry.Author, entry.id, entry.StoryIBelongTo, entry.SubmissionDate, entry.VotesCastForMe));
             }
 
             return entryList;

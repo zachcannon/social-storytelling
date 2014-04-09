@@ -13,14 +13,16 @@ namespace SocialStorytelling.Business
         public string Author { get; set; }
         public int StoryId { get; set; }
         public DateTime SubmissionDate { get; set; }
+        public int VotesCastForMe { get; set; }
 
-        public PendingEntry(string text, string author, int idNumber, int storyId, DateTime submissionDate)
+        public PendingEntry(string text, string author, int idNumber, int storyId, DateTime submissionDate, int votesForMe)
         {
             this.IdNumber = idNumber;
             this.Text = text;
             this.Author = author;
             this.StoryId = storyId;
             this.SubmissionDate = submissionDate;
+            this.VotesCastForMe = votesForMe;
         }
         
     }
