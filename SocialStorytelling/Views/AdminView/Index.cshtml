@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "AdminView";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin Page</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/admin.js")
+
+</head>
+<body>
+
+    <div class="container body-content">
+        <div class="jumbotron">
+            <p id="storycontainer">STORIES: <br></p>
+            <p id="entrycontainer">ENTRIES: <br></p>
+            <p id="pendingentrycontainer">PENDING ENTRIES: <br></p>
+        </div>
+
+        <div>
+            <p><br />Specific Entry #</p>
+            <button id="choose-story-button">Choose Story: </button>
+            <input id="choose-story-id" value="1" />
+
+            <p id="specific-entries">Specific Entries:<br /></p>
+        </div>
+
+        <div>
+            <p>
+                <br /> ----------------------PAGE COMMANDS BELOW---------------------------
+            </p>
+        </div>
+
+        <div>
+            <p><br />Add New Story</p>
+            <form action="@Url.Action("AddNewStory", "Home")" method="post">
+                Title:<input type="text" name="title"><br>
+                Prompt: <input type="text" name="prompt"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Add New Pending Entry</p>
+            <form action="@Url.Action("AddNewPendingEntry", "StoryView")" method="post">
+                Text:<input type="text" name="text"><br>
+                StoryID: <input type="text" name="storyId"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Vote For Pending Entry</p>
+            <form action="@Url.Action("VoteForPendingEntry", "StoryView")" method="post">
+                Pending Entry Id:<input type="text" name="pendingEntryId"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p>
+                <br /> ----------------------ADMIN COMMANDS BELOW---------------------------
+            </p>
+        </div>
+
+
+        <div>
+            <p><br />Remove Story</p>
+            <form action="@Url.Action("RemoveStory", "Home")" method="post">
+                Id To Remove:<input type="text" name="idToRemove"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Close Story</p>
+            <form action="@Url.Action("CloseStory", "Home")" method="post">
+                Story Id To Close:<input type="text" name="idToClose"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Add New Entry</p>
+            <form action="@Url.Action("AddNewEntry", "StoryView")" method="post">
+                Text:<input type="text" name="text"><br>
+                StoryID: <input type="text" name="storyId"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Promote Pending Entry</p>
+            <form action="@Url.Action("PromotePendingEntry", "StoryView")" method="post">
+                Pending Entry Id:<input type="text" name="idToPromote"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Promote Highest Pending Entry for Given Story</p>
+            <form action="@Url.Action("PromoteHighestPendingEntry", "StoryView")" method="post">
+                Story Id:<input type="text" name="idToPromote"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Remove Pending Entry</p>
+            <form action="@Url.Action("RemovePendingEntry", "StoryView")" method="post">
+                Id To Remove:<input type="text" name="idToRemove"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <div>
+            <p><br />Remove Entry</p>
+            <form action="@Url.Action("RemoveEntry", "StoryView")" method="post">
+                Id To Remove:<input type="text" name="idToRemove"><br>
+                <input type="submit">
+            </form>
+        </div>
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+</body>
+</html>
