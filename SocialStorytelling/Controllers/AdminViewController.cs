@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace SocialStorytelling.Controllers
 {
-    public class AdminViewController : Controller
+    public class AdminController : Controller
     {
         //
         // GET: /AdminView/
-        public ActionResult Index()
+        public ActionResult AdminView()
         {
             return View();
         }
