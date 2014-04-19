@@ -75,20 +75,23 @@ namespace SocialStorytelling.Controllers
         [HttpGet]
         public ActionResult GetPendingEntryList()
         {
+            
             List<PendingEntry> pendingEntryList = service.GetPendingEntryList();
+            pendingEntryList = pendingEntryList.OrderBy(list => list.StoryId).ToList();
             return Json(pendingEntryList, JsonRequestBehavior.AllowGet);
         }
 
         // --------------------------------USER ACTIONS----------------------------------
 
         [HttpPost]
-        public ActionResult AddNewPendingEntry(string text, int storyId)
+        public ActionResult AddNewPendingEntry(string text)
         {
             if (Request.Cookies[AuthorizedUserCookie] != null)
             {
                 string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
                 string access_token = Request.Cookies[AuthorizedUserCookie]["access_token"];
                 string access_verifier = Request.Cookies[AuthorizedUserCookie]["access_verifier"];
+                int storyId = Convert.ToInt32(Request.Cookies[RecentStoryCookie]["recentStoryId"]);
                 service.AddPendingEntryToList(storyId, username, text, access_token, access_verifier);
                 return RedirectToAction("StoryView");
             }
