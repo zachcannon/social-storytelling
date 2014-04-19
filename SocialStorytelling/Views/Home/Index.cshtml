@@ -22,15 +22,6 @@
         </div>
 
         <div>
-            <p><br />Add New Story</p>
-            <form action="@Url.Action("AddNewStory", "Home")" method="post">
-                Title:<input type="text" name="title"><br>
-                Prompt: <input type="text" name="prompt"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
             <p><br />Go To Story</p>
             <form action="@Url.Action("GoToStoryViewForStory", "Home")" method="post">
                 Story Id:<input type="text" name="theStoryId"><br>
@@ -42,6 +33,15 @@
             <p>
                 <br/> ----------------------ADMIN COMMANDS BELOW---------------------------
             </p>
+        </div>
+
+        <div>
+            <p><br />Add New Story</p>
+            <form action="@Url.Action("AddNewStory", "Home")" method="post">
+                Title:<input type="text" name="title"><br>
+                Prompt: <input type="text" name="prompt"><br>
+                <input type="submit">
+            </form>
         </div>
 
         <div>
