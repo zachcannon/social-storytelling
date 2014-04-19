@@ -77,6 +77,49 @@ namespace SocialStorytelling.Business
             return entryList;
         }
 
+        public List<PendingEntry> GetPendingEntryListForGivenStory(int storyId)
+        {
+            List<PendingEntryData> pendingEntryData = data.GetPendingEntries();
+
+            List<PendingEntry> entryList = new List<PendingEntry>();
+            foreach (PendingEntryData entry in pendingEntryData)
+            {
+                if (entry.StoryIBelongTo == storyId)
+                    entryList.Add(new PendingEntry(entry.Text, entry.Author, entry.id, entry.StoryIBelongTo, entry.SubmissionDate, entry.VotesCastForMe));
+            }
+
+            return entryList;
+        }
+
+        public string GetSpecificStoryStatus(int storyId)
+        {
+            List<StoryData> stories = data.GetStories();
+            foreach(StoryData story in stories)
+            {
+                if (story.id == storyId)
+                {
+                    if (story.StoryClosed)
+                        return "Closed!";
+                    else
+                        return "Open!";
+                }
+            }
+            return "Story not Found";
+        }
+
+        public bool IsStoryInBook(int storyId)
+        {
+            List<StoryData> stories = data.GetStories();
+            foreach (StoryData story in stories)
+            {
+                if (story.id == storyId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         //----------------------USER COMMANDS---------------------
 
         public void AddNewStoryToBook(string title, string prompt, string access_token, string access_verifier)

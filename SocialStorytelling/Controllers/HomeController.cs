@@ -42,6 +42,17 @@ namespace SocialStorytelling.Controllers
             else
                 return RedirectToAction("Authorize", "Account");
         }
+
+        [HttpPost]
+        public ActionResult GoToStoryViewForStory(int theStoryId)
+        {
+            if (Request.Cookies[AuthorizedUserCookie] != null)
+            {
+                return RedirectToAction("StoryView", "StoryView", new { storyIdToView = theStoryId });
+            }
+            else
+                return RedirectToAction("Authorize", "Account");
+        }
         
         
         //--------------ADMIN COMMANDS----------------

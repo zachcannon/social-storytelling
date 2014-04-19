@@ -10,30 +10,65 @@ namespace SocialStorytelling.Controllers
     public class StoryViewController : Controller
     {
         private string AuthorizedUserCookie = "TweetAuthCookie";
+        private string RecentStoryCookie = "RecentStory";
         SocialStorytellingService service = new SocialStorytellingService();
 
-        public ActionResult StoryView()
+
+        public ActionResult StoryView(int storyIdToView = -1)
         {
             if (Request.Cookies[AuthorizedUserCookie] != null)
                 ViewBag.Username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
             else
                 ViewBag.Username = "No users logged in yet.";
+
+            if (storyIdToView == -1)
+            {
+                HttpCookie myCookie = HttpContext.Request.Cookies[RecentStoryCookie];               
+                if (myCookie != null)
+                    storyIdToView = Convert.ToInt32(myCookie["recentStoryId"]);
+            }
+
+            if (storyIdToView == -1)
+                return RedirectToAction("Index", "Home");
+
+            if (!service.IsStoryInBook(storyIdToView))
+                return RedirectToAction("Index", "Home");
+
+            HttpCookie mostRecentStory = new HttpCookie(RecentStoryCookie);
+            mostRecentStory["recentStoryId"] = storyIdToView.ToString();
+            Response.Cookies.Add(mostRecentStory);
+
+            ViewBag.CurrentStoryStatus = service.GetSpecificStoryStatus(storyIdToView);
+
             return View();
         }
 
         // -------------------------GET REQUESTS TO DISPLAY DATABASE INFO---------------------
 
+        
+
         [HttpGet]
-        public ActionResult GetEntryList()
+        public ActionResult GetEntriesForGivenStory()
         {
-            List<Entry> entryList = service.GetEntryList();
+            string storyId = Request.Cookies[RecentStoryCookie]["recentStoryId"];
+
+            List<Entry> entryList = service.GetEntriesForGivenStory(Convert.ToInt32(storyId));
             return Json(entryList, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public ActionResult GetEntriesForGivenStory(int storyId)
+        public ActionResult GetPendingEntryListForGivenStory()
         {
-            List<Entry> entryList = service.GetEntriesForGivenStory(storyId);
+            string storyId = Request.Cookies[RecentStoryCookie]["recentStoryId"];
+
+            List<PendingEntry> pendingEntryList = service.GetPendingEntryListForGivenStory(Convert.ToInt32(storyId));
+            return Json(pendingEntryList, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetEntryList()
+        {
+            List<Entry> entryList = service.GetEntryList();
             return Json(entryList, JsonRequestBehavior.AllowGet);
         }
 

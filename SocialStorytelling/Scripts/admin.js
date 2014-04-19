@@ -62,33 +62,7 @@ $(document).ready(function () {
             url: "/StoryView/GetPendingEntryList"
         }).done(printPendingEntryList);
 
-        //-------------------------BUTTON ACTIONS---------------------------
-
-        var printStoryEntry = function (i, data) {
-            $('#specific-entries').append("Id: " + data.IdNumber);
-            $('#specific-entries').append("  ");
-            $('#specific-entries').append("My Story ID:" + data.StoryId);
-            $('#specific-entries').append("  ");
-            $('#specific-entries').append("Text: " + data.Text);
-            $('#specific-entries').append("  ");
-            $('#specific-entries').append("Author: " + data.Author);
-            $('#specific-entries').append(" ");
-            $('#specific-entries').append("Submit: " + data.SubmissionDate);
-            $('#specific-entries').append("<br>");
-        }
-
-        var printAStorysEntryList = function (data) {
-            $.each(data, printStoryEntry)
-        }
-
-        $('#choose-story-button').click(function () {
-            var idOfStory = $('#choose-story-id').val().toString();
-
-            $.ajax({
-                url: "/StoryView/GetEntriesForGivenStory",
-                data: { "storyId": idOfStory }
-            }).done(printAStorysEntryList);
-        });
+       
 
     });
 });
