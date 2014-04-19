@@ -19,8 +19,8 @@ namespace SocialStorytelling.Business
         /// Use the following command to set SocialStorytell as the current user. 
         /// TwitterCredentials.SetCredentials(SocialStorytellAccessToken, SocialStorytellAccessVerifier, ConsumerKey, ConsumerSecret);
         /// </summary>
-        private string SocialStorytellAccessToken = "2372951286-8u4NNyblRpippMnlzsbCjf7fcGy6nZqPT0oAQfL";
-        private string SocialStorytellAccessVerifier = "ooWWJsM2Ge1uVeh4dIHxUUj03GbVVr9B0SfXbBb7ysdmI";
+        private string SocialStoriezAccessToken = "2372951286-8u4NNyblRpippMnlzsbCjf7fcGy6nZqPT0oAQfL";
+        private string SocialStoriesAccessVerifier = "ooWWJsM2Ge1uVeh4dIHxUUj03GbVVr9B0SfXbBb7ysdmI";
 
         private ApplicationContext data = new ApplicationContext();
 
@@ -121,25 +121,7 @@ namespace SocialStorytelling.Business
         }
 
         //----------------------USER COMMANDS---------------------
-
-        public void AddNewStoryToBook(string title, string prompt, string access_token, string access_verifier)
-        {
-            Censor censor = new Censor();
-            title = censor.CensorText(title);
-            prompt = censor.CensorText(prompt);
-
-            if(data.AddStoryToDb(new StoryData(1, title, prompt)))
-            {
-                TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
-                Tweet.PublishTweet("I just posted a new story titled: " + title + " on Social Storytelling!");
-
-                TwitterCredentials.SetCredentials(SocialStorytellAccessToken, SocialStorytellAccessVerifier, ConsumerKey, ConsumerSecret);
-                Tweet.PublishTweet("I just posted a new story titled: " + title + " on Social Storytelling!");
-            }
-
-            
-        }
-
+        
         public void AddPendingEntryToList(int storyId, string author, string text, string access_token, string access_verifier)
         {
             Censor censor = new Censor();
@@ -149,7 +131,7 @@ namespace SocialStorytelling.Business
             if(data.AddPendingEntryToDb(text, author, storyId))
             {
                 TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
-                Tweet.PublishTweet("I just posted a new pending entry: " + text + " on Social Storytelling!");
+                Tweet.PublishTweet("I just posted a new pending entry: " + text + " to Story " + storyId + " on Social Storytelling!");
             }
         }
 
@@ -157,13 +139,27 @@ namespace SocialStorytelling.Business
         {
             if (data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting))
             {
-                TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
-                Tweet.PublishTweet("I just voted for pending entry number: " + idToVoteFor + " on Social Storytelling!");
+                //TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
+                //Tweet.PublishTweet("I just voted for pending entry number: " + idToVoteFor + " on Social Storytelling!");
             }
         }
         
         //---------------------ADMIN COMMANDS-------------------
 
+        public void AddNewStoryToBook(string title, string prompt, string access_token, string access_verifier)
+        {
+            Censor censor = new Censor();
+            title = censor.CensorText(title);
+            prompt = censor.CensorText(prompt);
+
+            if (data.AddStoryToDb(new StoryData(1, title, prompt)))
+            {
+                TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
+                Tweet.PublishTweet("A new story, titled '" + title + "' was just posted on Social Storytelling!");
+            }
+
+
+        }
         public void AddEntryToStory(int storyId, string author, string text)
         {
             Censor censor = new Censor();

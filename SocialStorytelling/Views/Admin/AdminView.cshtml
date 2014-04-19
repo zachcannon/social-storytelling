@@ -31,7 +31,7 @@
 
         <div>
             <p><br />Add New Story</p>
-            <form action="@Url.Action("AddNewStory", "Home")" method="post">
+            <form action="@Url.Action("AddNewStory", "Admin")" method="post">
                 Title:<input type="text" name="title"><br>
                 Prompt: <input type="text" name="prompt"><br>
                 <input type="submit">
@@ -64,7 +64,7 @@
 
         <div>
             <p><br />Remove Story</p>
-            <form action="@Url.Action("RemoveStory", "Home")" method="post">
+            <form action="@Url.Action("RemoveStory", "Admin")" method="post">
                 Id To Remove:<input type="text" name="idToRemove"><br>
                 <input type="submit">
             </form>
@@ -72,7 +72,7 @@
 
         <div>
             <p><br />Close Story</p>
-            <form action="@Url.Action("CloseStory", "Home")" method="post">
+            <form action="@Url.Action("CloseStory", "Admin")" method="post">
                 Story Id To Close:<input type="text" name="idToClose"><br>
                 <input type="submit">
             </form>

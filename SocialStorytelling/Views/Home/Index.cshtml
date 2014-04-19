@@ -28,37 +28,6 @@
                 <input type="submit">
             </form>
         </div>
-
-        <div>
-            <p>
-                <br/> ----------------------ADMIN COMMANDS BELOW---------------------------
-            </p>
-        </div>
-
-        <div>
-            <p><br />Add New Story</p>
-            <form action="@Url.Action("AddNewStory", "Home")" method="post">
-                Title:<input type="text" name="title"><br>
-                Prompt: <input type="text" name="prompt"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Remove Story</p>
-            <form action="@Url.Action("RemoveStory", "Home")" method="post">
-                Id To Remove:<input type="text" name="idToRemove"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Close Story</p>
-            <form action="@Url.Action("CloseStory", "Home")" method="post">
-                Story Id To Close:<input type="text" name="idToClose"><br>
-                <input type="submit">
-            </form>
-        </div>
               
         <hr />
         <footer>
