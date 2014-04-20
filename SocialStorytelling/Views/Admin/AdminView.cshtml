@@ -30,15 +30,6 @@
         </div>
 
         <div>
-            <p><br />Add New Story</p>
-            <form action="@Url.Action("AddNewStory", "Admin")" method="post">
-                Title:<input type="text" name="title"><br>
-                Prompt: <input type="text" name="prompt"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
             <p><br />Add New Pending Entry</p>
             <form action="@Url.Action("AddNewPendingEntry", "StoryView")" method="post">
                 Text:<input type="text" name="text"><br>
@@ -57,10 +48,18 @@
 
         <div>
             <p>
-                <br /> ----------------------ADMIN COMMANDS BELOW---------------------------
+                <br /> ----------------------ADMIN COMMANDS FOR HOME PAGE BELOW---------------------------
             </p>
         </div>
 
+        <div>
+            <p><br />Add New Story</p>
+            <form action="@Url.Action("AddNewStory", "Admin")" method="post">
+                Title:<input type="text" name="title"><br>
+                Prompt: <input type="text" name="prompt"><br>
+                <input type="submit">
+            </form>
+        </div>
 
         <div>
             <p><br />Remove Story</p>
@@ -79,8 +78,14 @@
         </div>
 
         <div>
+            <p>
+                <br /> ----------------------ADMIN COMMANDS FOR STORY PAGE BELOW---------------------------
+            </p>
+        </div>
+
+        <div>
             <p><br />Add New Entry</p>
-            <form action="@Url.Action("AddNewEntry", "StoryView")" method="post">
+            <form action="@Url.Action("AddNewEntry", "Admin")" method="post">
                 Text:<input type="text" name="text"><br>
                 StoryID: <input type="text" name="storyId"><br>
                 <input type="submit">
@@ -89,7 +94,7 @@
 
         <div>
             <p><br />Promote Pending Entry</p>
-            <form action="@Url.Action("PromotePendingEntry", "StoryView")" method="post">
+            <form action="@Url.Action("PromotePendingEntry", "Admin")" method="post">
                 Pending Entry Id:<input type="text" name="idToPromote"><br>
                 <input type="submit">
             </form>
@@ -97,7 +102,7 @@
 
         <div>
             <p><br />Promote Highest Pending Entry for Given Story</p>
-            <form action="@Url.Action("PromoteHighestPendingEntry", "StoryView")" method="post">
+            <form action="@Url.Action("PromoteHighestPendingEntry", "Admin")" method="post">
                 Story Id:<input type="text" name="idToPromote"><br>
                 <input type="submit">
             </form>
@@ -105,7 +110,7 @@
 
         <div>
             <p><br />Remove Pending Entry</p>
-            <form action="@Url.Action("RemovePendingEntry", "StoryView")" method="post">
+            <form action="@Url.Action("RemovePendingEntry", "Admin")" method="post">
                 Id To Remove:<input type="text" name="idToRemove"><br>
                 <input type="submit">
             </form>
@@ -113,7 +118,7 @@
 
         <div>
             <p><br />Remove Entry</p>
-            <form action="@Url.Action("RemoveEntry", "StoryView")" method="post">
+            <form action="@Url.Action("RemoveEntry", "Admin")" method="post">
                 Id To Remove:<input type="text" name="idToRemove"><br>
                 <input type="submit">
             </form>

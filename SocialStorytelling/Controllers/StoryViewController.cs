@@ -113,49 +113,5 @@ namespace SocialStorytelling.Controllers
             else
                 return RedirectToAction("Authorize", "Account");
         }
-
-        // -----------------------------ADMIN COMMANDS------------------------------
-
-        [HttpPost]
-        public ActionResult AddNewEntry(string text, int storyId)
-        {
-            if (Request.Cookies[AuthorizedUserCookie] != null)
-            {
-                string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-                service.AddEntryToStory(storyId, username, text);
-                return RedirectToAction("StoryView");
-            }
-            else
-                return RedirectToAction("Authorize", "Account");
-        }
-
-        [HttpPost]
-        public ActionResult PromotePendingEntry(int idToPromote)
-        {
-            service.PromotePendingEntryFromList(idToPromote);
-            return RedirectToAction("StoryView");
-        }
-
-        [HttpPost]
-        public ActionResult PromoteHighestPendingEntry(int idToPromote)
-        {
-            service.PromoteMostPopularPendingEntry(idToPromote);
-            return RedirectToAction("StoryView");
-        }
-
-        [HttpPost]
-        public ActionResult RemovePendingEntry(int idToRemove)
-        {
-            service.RemovePendingEntryFromList(idToRemove);
-            return RedirectToAction("StoryView");
-        }
-
-
-        [HttpPost]
-        public ActionResult RemoveEntry(int idToRemove)
-        {
-            service.RemoveEntryFromList(idToRemove);
-            return RedirectToAction("StoryView");
-        }
 	}
 }

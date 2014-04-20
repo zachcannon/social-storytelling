@@ -45,53 +45,6 @@
             </form>
         </div>
 
-        <div>
-            <p>
-                <br /> ----------------------ADMIN COMMANDS BELOW---------------------------
-            </p>
-        </div>
-
-        <div>
-            <p><br />Add New Entry</p>
-            <form action="@Url.Action("AddNewEntry", "StoryView")" method="post">
-                Text:<input type="text" name="text"><br>
-                StoryID: <input type="text" name="storyId"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Promote Pending Entry</p>
-            <form action="@Url.Action("PromotePendingEntry", "StoryView")" method="post">
-                Pending Entry Id:<input type="text" name="idToPromote"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Promote Highest Pending Entry for Given Story</p>
-            <form action="@Url.Action("PromoteHighestPendingEntry", "StoryView")" method="post">
-                Story Id:<input type="text" name="idToPromote"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Remove Pending Entry</p>
-            <form action="@Url.Action("RemovePendingEntry", "StoryView")" method="post">
-                Id To Remove:<input type="text" name="idToRemove"><br>
-                <input type="submit">
-            </form>
-        </div>
-
-        <div>
-            <p><br />Remove Entry</p>
-            <form action="@Url.Action("RemoveEntry", "StoryView")" method="post">
-                Id To Remove:<input type="text" name="idToRemove"><br>
-                <input type="submit">
-            </form>
-        </div>
-
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
