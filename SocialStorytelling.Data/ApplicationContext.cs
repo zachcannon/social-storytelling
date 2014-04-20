@@ -89,6 +89,8 @@ namespace SocialStorytelling.Data
                     db.Stories.Add(newStory);
                     db.SaveChanges();
 
+                    this.AddEntryToDb(1, newStory.Prompt, "SocialStoriez", newStory.id);
+
                     return true;
                 }
 
@@ -223,6 +225,15 @@ namespace SocialStorytelling.Data
                 var storyToClose = db.Stories.Find(storyIdToClose);
                 storyToClose.StoryClosed = true;
                 db.SaveChanges();
+            }
+        }
+
+        public int GetNumberOfEntriesInStory(int storyId)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var story = db.Stories.Find(storyId);
+                return story.Entries.Count();
             }
         }
     }

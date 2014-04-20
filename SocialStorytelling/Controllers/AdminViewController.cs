@@ -81,9 +81,9 @@ namespace SocialStorytelling.Controllers
 
         //--------------------View Story Page Story Updating---------------------------
         [HttpGet]
-        public ActionResult CheckForNewEntriesOnTwitter()
+        public ActionResult CheckForNewEntriesOnTwitter(int idToCheck)
         {
-            service.CheckForNewEntries();
+            service.CheckForNewPendingEntriesOnTwitter(idToCheck);
             return RedirectToAction("AdminView"); 
         }
 

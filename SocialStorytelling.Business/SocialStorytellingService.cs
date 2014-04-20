@@ -175,6 +175,7 @@ namespace SocialStorytelling.Business
                     {
                         TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
                         Tweet.PublishTweet("Story #" + story.Id + " - Title: " + story.Title + " - Prompt: " + story.Prompt);
+                        Tweet.PublishTweet("Entry #" + 1 + " of Story #" + story.Id + ": " + story.Prompt);
                         break;
                     }
                 }                
@@ -223,9 +224,52 @@ namespace SocialStorytelling.Business
         }
         
         //---------------------ADMIN COMMANDS - Twitter -------------------
-        
-        public void CheckForNewEntries()
+
+        public void CheckForNewPendingEntriesOnTwitter(int idToCheck)
         {
+
+            int numberOfEntriesInStory = data.GetNumberOfEntriesInStory(idToCheck);
+            string pendingEntryIDString = "Entry #" + numberOfEntriesInStory + " of Story #" + idToCheck;
+
+            TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);            
+            var timeline = Timeline.GetHomeTimeline();
+
+            foreach(var tweet in timeline)
+            {
+                if(tweet.Text.Contains(pendingEntryIDString))
+                {
+                    var replies = Search.SearchDirectRepliesTo(tweet);
+
+                    foreach (var reply in replies)
+                    {
+                        CheckIfPendingEntryExistsAndAddIt(idToCheck, reply.Creator.ScreenName, reply.Text);
+                    }
+
+                    break;
+                }
+            }
+
+        }
+
+        private void CheckIfPendingEntryExistsAndAddIt(int storyId, string author, string text)
+        {
+            if (!text.Contains("Submission: "))
+                return;
+
+            int stringParse = text.IndexOf("Submission: ");
+            text = text.Substring(stringParse + 12);
+
+            List<PendingEntryData> pendingEntries = data.GetPendingEntriesForStoryFromDb(storyId);
+
+            bool exists = false;
+            foreach (PendingEntryData entry in pendingEntries)
+            {
+                if (entry.Text.Contains(text))
+                    exists = true;
+            }
+
+            if (!exists)
+                data.AddPendingEntryToDb(text, author, storyId);
 
         }
 
@@ -261,8 +305,13 @@ namespace SocialStorytelling.Business
 
         private void TweetAboutPromotedPendingEntry(PendingEntryData entryToPromote)
         {
+            int entryNumber = data.GetNumberOfEntriesInStory(entryToPromote.StoryIBelongTo);
+            int storyNumber = entryToPromote.StoryIBelongTo;
+            
             TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
+            Tweet.PublishTweet("Entry #" + entryNumber + " of Story #" + storyNumber + ": " + entryToPromote.Text);
 
+            /*
             var timeline = Timeline.GetHomeTimeline();
 
             foreach(var tweet in timeline)
@@ -283,9 +332,9 @@ namespace SocialStorytelling.Business
                     break;
                 }
                    
-            }            
+            }       */    
         }
-
+        
         private int ParseStoryIdFromTweet(string text)
         {
             if (!text.Substring(0, 5).Equals("Story"))
@@ -306,6 +355,6 @@ namespace SocialStorytelling.Business
             string substring = text.Substring(startChar, length-startChar);
 
             return Convert.ToInt32(substring);
-        }
+        } 
     }
 }
