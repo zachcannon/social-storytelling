@@ -23,10 +23,7 @@ namespace SocialStorytelling.Controllers
         [HttpPost]
         public ActionResult AddNewStory(string title, string prompt)
         {
-            string username = Request.Cookies[AuthorizedUserCookie]["screen_name"];
-            string access_token = Request.Cookies[AuthorizedUserCookie]["access_token"];
-            string access_verifier = Request.Cookies[AuthorizedUserCookie]["access_verifier"];
-            service.AddNewStoryToBook(title, prompt, access_token, access_verifier);
+            service.AddNewStoryToBook(title, prompt);
             return RedirectToAction("AdminView");            
         }
 
@@ -53,11 +50,10 @@ namespace SocialStorytelling.Controllers
             return RedirectToAction("AdminView");
         }
 
-
         [HttpPost]
         public ActionResult PromoteHighestPendingEntry(int idToPromote)
         {
-            service.PromoteMostPopularPendingEntry(idToPromote);
+            service.PromoteMostPopularPendingEntryAndTweet(idToPromote);
             return RedirectToAction("AdminView");
         }
 
@@ -68,7 +64,6 @@ namespace SocialStorytelling.Controllers
             service.AddEntryToStory(storyId, username, text);
             return RedirectToAction("AdminView");
         }
-
 
         [HttpPost]
         public ActionResult RemovePendingEntry(int idToRemove)
@@ -81,6 +76,21 @@ namespace SocialStorytelling.Controllers
         public ActionResult RemoveEntry(int idToRemove)
         {
             service.RemoveEntryFromList(idToRemove);
+            return RedirectToAction("AdminView");
+        }
+
+        //--------------------View Story Page Story Updating---------------------------
+        [HttpGet]
+        public ActionResult CheckForNewEntriesOnTwitter()
+        {
+            service.CheckForNewEntries();
+            return RedirectToAction("AdminView"); 
+        }
+
+        [HttpPost]
+        public ActionResult PromoteHighestPendingEntryAndTweet(int idToPromote)
+        {
+            service.PromoteMostPopularPendingEntryAndTweet(idToPromote);
             return RedirectToAction("AdminView");
         }
 	}

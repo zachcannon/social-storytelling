@@ -107,6 +107,19 @@ namespace SocialStorytelling.Business
             return "Story not Found";
         }
 
+        public string GetSpecificStoryPrompt(int storyIdToView)
+        {
+            List<StoryData> stories = data.GetStories();
+            foreach (StoryData story in stories)
+            {
+                if (story.id == storyIdToView)
+                {
+                    return story.Prompt;
+                }
+            }
+            return "Story not Found";
+        }
+
         public bool IsStoryInBook(int storyId)
         {
             List<StoryData> stories = data.GetStories();
@@ -144,9 +157,9 @@ namespace SocialStorytelling.Business
             }
         }
         
-        //---------------------ADMIN COMMANDS-------------------
+        //---------------------ADMIN COMMANDS - SITE -------------------
 
-        public void AddNewStoryToBook(string title, string prompt, string access_token, string access_verifier)
+        public void AddNewStoryToBook(string title, string prompt)
         {
             Censor censor = new Censor();
             title = censor.CensorText(title);
@@ -154,12 +167,20 @@ namespace SocialStorytelling.Business
 
             if (data.AddStoryToDb(new StoryData(1, title, prompt)))
             {
-                TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
-                Tweet.PublishTweet("A new story, titled '" + title + "' was just posted on Social Storytelling!");
+                List<Story> allStories = GetStoryBook();
+
+                foreach(Story story in allStories)
+                {
+                    if (story.Prompt.Equals(prompt))
+                    {
+                        TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
+                        Tweet.PublishTweet("Story #" + story.Id + " - Title: " + story.Title + " - Prompt: " + story.Prompt);
+                        break;
+                    }
+                }                
             }
-
-
         }
+        
         public void AddEntryToStory(int storyId, string author, string text)
         {
             Censor censor = new Censor();
@@ -200,25 +221,35 @@ namespace SocialStorytelling.Business
         {
             data.CloseStory(storyIdToClose);
         }
+        
+        //---------------------ADMIN COMMANDS - Twitter -------------------
+        
+        public void CheckForNewEntries()
+        {
 
-        public void PromoteMostPopularPendingEntry(int idToPromote)
+        }
+
+        public void PromoteMostPopularPendingEntryAndTweet(int idToPromote)
         {
             List<PendingEntryData> pendingEntriesForStory = data.GetPendingEntriesForStoryFromDb(idToPromote);
 
             int pendingIdToPromote = -1;
             int highestCount = 0;
+            PendingEntryData entryToPromote = pendingEntriesForStory.First();
 
-            foreach(PendingEntryData entry in pendingEntriesForStory)
+            foreach (PendingEntryData entry in pendingEntriesForStory)
             {
                 if (entry.VotesCastForMe >= highestCount)
                 {
                     highestCount = entry.VotesCastForMe;
                     pendingIdToPromote = entry.id;
+                    entryToPromote = entry;
                 }
-                    
+
             }
 
             PromotePendingEntryFromList(pendingIdToPromote);
+            TweetAboutPromotedPendingEntry(entryToPromote);
 
             foreach (PendingEntryData entry in pendingEntriesForStory)
             {
@@ -226,6 +257,55 @@ namespace SocialStorytelling.Business
                     RemovePendingEntryFromList(entry.id);
             }
 
+        }
+
+        private void TweetAboutPromotedPendingEntry(PendingEntryData entryToPromote)
+        {
+            TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
+
+            var timeline = Timeline.GetHomeTimeline();
+
+            foreach(var tweet in timeline)
+            {
+                if (ParseStoryIdFromTweet(tweet.Text) == entryToPromote.StoryIBelongTo)
+                {
+                    var replyTweet = tweet;
+                    var replies = Search.SearchDirectRepliesTo(tweet);
+
+                    while (replies.Count() != 0)
+                    {
+                        replyTweet = replies.First();
+                        replies = Search.SearchDirectRepliesTo(replyTweet);
+                    }
+
+                    replyTweet.PublishReply(entryToPromote.Text + " - " + entryToPromote.Author);
+
+                    break;
+                }
+                   
+            }            
+        }
+
+        private int ParseStoryIdFromTweet(string text)
+        {
+            if (!text.Substring(0, 5).Equals("Story"))
+                return -1;
+
+            int startChar = 7;
+            int length = 0;
+            
+            for(int i=startChar; i<15; i++)
+            {
+                if(text[i].CompareTo(' ') == 0)
+                {
+                    length = i;
+                    break;
+                }
+            }
+
+            string substring = text.Substring(startChar, length-startChar);
+
+            return Convert.ToInt32(substring);
         }
     }
 }
