@@ -312,6 +312,7 @@ namespace SocialStorytelling.Business
             PromotePendingEntryFromList(pendingIdToPromote);
             TweetAboutPromotedPendingEntry(entryToPromote);
 
+
             foreach (PendingEntryData entry in pendingEntriesForStory)
             {
                 if (entry.id != pendingIdToPromote)
@@ -326,7 +327,21 @@ namespace SocialStorytelling.Business
             int storyNumber = entryToPromote.StoryIBelongTo;
             
             TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
-            Tweet.PublishTweet("Entry #" + entryNumber + " of Story #" + storyNumber + ": " + entryToPromote.Text); 
+            Tweet.PublishTweet("Entry #" + entryNumber + " of Story #" + storyNumber + ": " + entryToPromote.Text);
+
+            string previousEntryPost = "Entry #" + (entryNumber-1) + " of Story #" + storyNumber;
+
+            TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
+            var timeline = Timeline.GetHomeTimeline();
+
+            foreach (var tweet in timeline)
+            {
+                if (tweet.Text.Contains(previousEntryPost))
+                {
+                    tweet.PublishReply("This entry is now closed! Go to - Entry #" + entryNumber + " of Story #" + storyNumber);
+                    break;
+                }
+            }
         }
         
         private int ParseStoryIdFromTweet(string text)
