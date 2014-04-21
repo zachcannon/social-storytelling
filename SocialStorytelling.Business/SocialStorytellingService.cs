@@ -243,7 +243,7 @@ namespace SocialStorytelling.Business
                     foreach (var reply in replies)
                     {
                         CheckIfPendingEntryExistsAndAddIt(idToCheck, reply.Creator.ScreenName, reply.Text);
-                        UpdateTwitterVotesForPendingEntry(idToCheck, reply.Text, reply.Creator.FavouritesCount);
+                        UpdateTwitterVotesForPendingEntry(idToCheck, reply.Text, reply.RetweetCount);
                     }
 
                     break;
