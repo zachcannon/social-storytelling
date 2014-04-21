@@ -200,7 +200,7 @@ namespace SocialStorytelling.Data
             }
         }
 
-        public bool CastVoteForStoryFromUser(int idToVoteFor, string userWhoIsVoting)
+        public bool CastVoteForStoryFromSite(int idToVoteFor, string userWhoIsVoting)
         {
             using (var db = new ApplicationContext())
             {
@@ -209,12 +209,22 @@ namespace SocialStorytelling.Data
                 if (!pendingEntry.Voters.Contains(userWhoIsVoting))
                 {
                     pendingEntry.Voters = pendingEntry.Voters+userWhoIsVoting;
-                    pendingEntry.VotesCastForMe++;
+                    pendingEntry.VotesCastForMeFromSite++;
 
                     db.SaveChanges();
                     return true;
                 }
                 return false;
+            }
+        }
+
+        public void UpdateVotesFromTwitter(int idToUpdate, int votesFromTwitter)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var pendingEntry = db.PendingEntries.Find(idToUpdate);
+                pendingEntry.VotesCastForMeFromTwitter = votesFromTwitter;
+                db.SaveChanges();
             }
         }
 

@@ -82,6 +82,10 @@
     <Compile Include="Migrations\201404071608135_AddStoryClosed.Designer.cs">
       <DependentUpon>201404071608135_AddStoryClosed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404210234407_Break-Votes-Up.cs" />
+    <Compile Include="Migrations\201404210234407_Break-Votes-Up.Designer.cs">
+      <DependentUpon>201404210234407_Break-Votes-Up.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PendingEntryData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404071608135_AddStoryClosed.resx">
       <DependentUpon>201404071608135_AddStoryClosed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404210234407_Break-Votes-Up.resx">
+      <DependentUpon>201404210234407_Break-Votes-Up.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -27,7 +27,7 @@ $(document).ready(function () {
         
 
         var printPendingEntry = function (i, data) {
-            $('#pendingentrycontainer').append("Id: "+data.IdNumber);
+            $('#pendingentrycontainer').append("Id: "+ data.IdNumber);
             $('#pendingentrycontainer').append("  ");
             $('#pendingentrycontainer').append("My Story ID:" + data.StoryId);
             $('#pendingentrycontainer').append("  ");

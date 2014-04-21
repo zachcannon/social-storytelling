@@ -71,7 +71,7 @@ namespace SocialStorytelling.Business
             List<PendingEntry> entryList = new List<PendingEntry>();
             foreach (PendingEntryData entry in pendingEntryData)
             {
-                entryList.Add(new PendingEntry(entry.Text, entry.Author, entry.id, entry.StoryIBelongTo, entry.SubmissionDate, entry.VotesCastForMe));
+                entryList.Add(new PendingEntry(entry.Text, entry.Author, entry.id, entry.StoryIBelongTo, entry.SubmissionDate, entry.VotesCastForMeFromSite+entry.VotesCastForMeFromTwitter));
             }
 
             return entryList;
@@ -85,7 +85,7 @@ namespace SocialStorytelling.Business
             foreach (PendingEntryData entry in pendingEntryData)
             {
                 if (entry.StoryIBelongTo == storyId)
-                    entryList.Add(new PendingEntry(entry.Text, entry.Author, entry.id, entry.StoryIBelongTo, entry.SubmissionDate, entry.VotesCastForMe));
+                    entryList.Add(new PendingEntry(entry.Text, entry.Author, entry.id, entry.StoryIBelongTo, entry.SubmissionDate, entry.VotesCastForMeFromSite+entry.VotesCastForMeFromTwitter));
             }
 
             return entryList;
@@ -150,7 +150,7 @@ namespace SocialStorytelling.Business
 
         public void VoteForPendingEntry(int idToVoteFor, string userWhoIsVoting, string access_token, string access_verifier)
         {
-            if (data.CastVoteForStoryFromUser(idToVoteFor, userWhoIsVoting))
+            if (data.CastVoteForStoryFromSite(idToVoteFor, userWhoIsVoting))
             {
                 //TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
                 //Tweet.PublishTweet("I just voted for pending entry number: " + idToVoteFor + " on Social Storytelling!");
@@ -243,12 +243,26 @@ namespace SocialStorytelling.Business
                     foreach (var reply in replies)
                     {
                         CheckIfPendingEntryExistsAndAddIt(idToCheck, reply.Creator.ScreenName, reply.Text);
+                        UpdateTwitterVotesForPendingEntry(idToCheck, reply.Text, reply.Creator.FavouritesCount);
                     }
 
                     break;
                 }
             }
 
+        }
+
+        private void UpdateTwitterVotesForPendingEntry(int storyId, string pendingEntryText, int twitterVotes)
+        {
+            List<PendingEntryData> pendingEntries = data.GetPendingEntriesForStoryFromDb(storyId);
+            foreach(PendingEntryData entry in pendingEntries)
+            {
+                if (pendingEntryText.Contains(entry.Text))
+                {
+                    data.UpdateVotesFromTwitter(entry.id, twitterVotes);
+                    break;
+                }
+            }
         }
 
         private void CheckIfPendingEntryExistsAndAddIt(int storyId, string author, string text)
@@ -283,9 +297,9 @@ namespace SocialStorytelling.Business
 
             foreach (PendingEntryData entry in pendingEntriesForStory)
             {
-                if (entry.VotesCastForMe >= highestCount)
+                if ((entry.VotesCastForMeFromSite+entry.VotesCastForMeFromTwitter) >= highestCount)
                 {
-                    highestCount = entry.VotesCastForMe;
+                    highestCount = entry.VotesCastForMeFromSite+entry.VotesCastForMeFromTwitter;
                     pendingIdToPromote = entry.id;
                     entryToPromote = entry;
                 }
