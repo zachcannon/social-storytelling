@@ -291,6 +291,9 @@ namespace SocialStorytelling.Business
         {
             List<PendingEntryData> pendingEntriesForStory = data.GetPendingEntriesForStoryFromDb(idToPromote);
 
+            if (pendingEntriesForStory.Count() < 1)
+                return;
+
             int pendingIdToPromote = -1;
             int highestCount = 0;
             PendingEntryData entryToPromote = pendingEntriesForStory.First();
@@ -323,30 +326,7 @@ namespace SocialStorytelling.Business
             int storyNumber = entryToPromote.StoryIBelongTo;
             
             TwitterCredentials.SetCredentials(SocialStoriezAccessToken, SocialStoriesAccessVerifier, ConsumerKey, ConsumerSecret);
-            Tweet.PublishTweet("Entry #" + entryNumber + " of Story #" + storyNumber + ": " + entryToPromote.Text);
-
-            /*
-            var timeline = Timeline.GetHomeTimeline();
-
-            foreach(var tweet in timeline)
-            {
-                if (ParseStoryIdFromTweet(tweet.Text) == entryToPromote.StoryIBelongTo)
-                {
-                    var replyTweet = tweet;
-                    var replies = Search.SearchDirectRepliesTo(tweet);
-
-                    while (replies.Count() != 0)
-                    {
-                        replyTweet = replies.First();
-                        replies = Search.SearchDirectRepliesTo(replyTweet);
-                    }
-
-                    replyTweet.PublishReply(entryToPromote.Text + " - " + entryToPromote.Author);
-
-                    break;
-                }
-                   
-            }       */    
+            Tweet.PublishTweet("Entry #" + entryNumber + " of Story #" + storyNumber + ": " + entryToPromote.Text); 
         }
         
         private int ParseStoryIdFromTweet(string text)
