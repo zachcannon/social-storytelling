@@ -1,10 +1,18 @@
-﻿/// <reference path="~/Scripts/jquery-ui-1.10.3.min.js" />
+/// <reference path="~/Scripts/jquery-ui-1.10.3.min.js" />
 
 $(document).ready(function () {
     $(function () {
 
         var printStoryEntry = function (i, data) {
-            $('#entrycontainer').append("Id: " + data.IdNumber);
+            var x = i % 2;
+            var color = 'd';
+            if (x == 1) color = 'c';
+            $('#entrycontainer').append('<div style="background-color:#' + color + color + color
+                + ';padding:0;margin:0;position:relative;left:-6%;width:112%;border:0;border-radius:0;">'
+                + data.Text + '<br>'
+                + "</div>");
+
+            /*$('#entrycontainer').append("Id: " + data.IdNumber);
             $('#entrycontainer').append("  ");
             $('#entrycontainer').append("My Story ID:" + data.StoryId);
             $('#entrycontainer').append("  ");
@@ -13,7 +21,7 @@ $(document).ready(function () {
             $('#entrycontainer').append("Author: " + data.Author);
             $('#entrycontainer').append(" ");
             $('#entrycontainer').append("Submit: " + data.SubmissionDate);
-            $('#entrycontainer').append("<br>");
+            $('#entrycontainer').append("<br>");*/
         }
 
         var printAStorysEntryList = function (data) {
@@ -26,19 +34,13 @@ $(document).ready(function () {
         }).done(printAStorysEntryList);
         
 
+
         var printPendingEntry = function (i, data) {
-            $('#pendingentrycontainer').append("Id: "+ data.IdNumber);
-            $('#pendingentrycontainer').append("  ");
-            $('#pendingentrycontainer').append("My Story ID:" + data.StoryId);
-            $('#pendingentrycontainer').append("  ");
-            $('#pendingentrycontainer').append("Text: "+data.Text);
-            $('#pendingentrycontainer').append("  ");
-            $('#pendingentrycontainer').append("Author: "+data.Author);
-            $('#pendingentrycontainer').append(" ");            
-            $('#pendingentrycontainer').append("Submit: " + data.SubmissionDate);
-            $('#pendingentrycontainer').append(" ");
-            $('#pendingentrycontainer').append("Votes: " + data.VotesCastForMe);
-            $('#pendingentrycontainer').append("<br>");
+            $('#pending_container').append('<div style="border:dashed;">');
+            $('#pending_container').append("<h4>Entry #"+ data.IdNumber + ':</h4>');
+            $('#pending_container').append('<p>'+data.Text+'</p>');
+            $('#pending_container').append('<p style="font-size:smaller;">Votes: ' + data.VotesCastForMe + '</p>');
+            $('#pending_container').append("</div>");
         }
 
         var printPendingEntryList = function (data) {
