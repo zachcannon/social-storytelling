@@ -15,6 +15,3 @@ https://github.com/danielcrenna/tweetsharp
 Thanks to Neil Meredith for help with getting cookies working:
 http://www.codeproject.com/Articles/114478/Twitter-Made-Easy-Post-to-Your-Twitter-Account-wit
 
-####To-Do
-
-Pending entry - in tweet format
