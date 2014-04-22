@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Story View Page";
 }
 <!DOCTYPE html>
@@ -18,32 +18,28 @@
 
     <div class="container body-content">
         <div class="jumbotron">
-            <p>Current Story Status: @ViewBag.CurrentStoryStatus</p>
-            <p>Prompt: @ViewBag.CurrentStoryPrompt</p>
-            <p id="entrycontainer">ENTRIES: <br></p>
-            <p id="pendingentrycontainer">PENDING ENTRIES: <br></p>
+            <!--<p>Current Story Status: @ViewBag.CurrentStoryStatus</p>-->
+            <h2>@ViewBag.CurrentStoryPrompt</h2>
+            <p id="entrycontainer" align="center"></p>
+           <!-- <p id="pendingentrycontainer">PENDING ENTRIES: <br></p>-->
         </div>
 
         <div>
-            <p>
-                <br /> ----------------------PAGE ACTIONS---------------------------
-            </p>
-        </div>
-
-        <div>
-            <p><br />Add New Pending Entry</p>
+            <p><br />Submit an entry:</p>
             <form action="@Url.Action("AddNewPendingEntry", "StoryView")" method="post">
-                Text:<input type="text" name="text"><br>
+                <textarea name="text" rows="3" cols="100" maxlength="140" style="resize:none;max-width:none;width:auto;"></textarea><br>
                 <input type="submit">
             </form>
         </div>
 
-        <div>
+        <div style="width:30%;display:inline-block;">
             <p><br />Vote For Pending Entry</p>
             <form action="@Url.Action("VoteForPendingEntry", "StoryView")" method="post">
                 Pending Entry Id:<input type="text" name="pendingEntryId"><br>
                 <input type="submit">
             </form>
+        </div>
+        <div id="pending_container" style="display:inline-block;">
         </div>
 
         <hr />
