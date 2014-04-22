@@ -24,7 +24,7 @@
            <!-- <p id="pendingentrycontainer">PENDING ENTRIES: <br></p>-->
         </div>
 
-        <div>
+        <div style="padding-bottom:25px;">
             <p><br />Submit an entry:</p>
             <form action="@Url.Action("AddNewPendingEntry", "StoryView")" method="post">
                 <textarea name="text" rows="3" cols="100" maxlength="140" style="resize:none;max-width:none;width:auto;"></textarea><br>
@@ -33,13 +33,13 @@
         </div>
 
         <div style="width:30%;display:inline-block;">
-            <p><br />Vote For Pending Entry</p>
+            <p>Vote For Pending Entry</p>
             <form action="@Url.Action("VoteForPendingEntry", "StoryView")" method="post">
                 Pending Entry Id:<input type="text" name="pendingEntryId"><br>
                 <input type="submit">
             </form>
         </div>
-        <div id="pending_container" style="display:inline-block;">
+        <div id="pending_container" style="display:inline-block;vertical-align:top;">
         </div>
 
         <hr />
