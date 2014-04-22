@@ -338,7 +338,7 @@ namespace SocialStorytelling.Business
             {
                 if (tweet.Text.Contains(previousEntryPost))
                 {
-                    tweet.PublishReply("This entry is now closed! Go to - Entry #" + entryNumber + " of Story #" + storyNumber);
+                    tweet.PublishReply("This entry is now closed! Go to - Entry #" + entryNumber + " of Story - " + storyNumber);
                     break;
                 }
             }
