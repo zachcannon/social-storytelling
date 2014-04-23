@@ -157,7 +157,7 @@ namespace SocialStorytelling.Business
             if(data.AddPendingEntryToDb(text, author, storyId))
             {
                 TwitterCredentials.SetCredentials(access_token, access_verifier, ConsumerKey, ConsumerSecret);
-                Tweet.PublishTweet("I just posted a new pending entry: " + text + " to Story " + storyId + " on Social Storytelling!");
+                Tweet.PublishTweet("I just posted a new pending entry to Story " + storyId + " on Social Storytelling!");
             }
         }
 
