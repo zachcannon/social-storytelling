@@ -18,14 +18,15 @@
     
     <div class="container body-content">
         <div class="jumbotron">
-            <p id="storycontainer">STORIES: <br></p>
+            <h2>STORIES: <br></h2>
+            <p id="storycontainer"></p>
         </div>
 
-        <div>
+        <div style="visibility: hidden">
             <p><br />Go To Story</p>
             <form action="@Url.Action("GoToStoryViewForStory", "Home")" method="post">
-                Story Id:<input type="text" name="theStoryId"><br>
-                <input type="submit">
+                Story Id:<input type="text" name="theStoryId" id="storybox"><br>
+                <input type="submit" id="submitButton">
             </form>
         </div>
               

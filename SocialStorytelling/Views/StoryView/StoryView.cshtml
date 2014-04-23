@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewBag.Title = "Story View Page";
 }
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
     <div class="container body-content">
         <div class="jumbotron">
             <!--<p>Current Story Status: @ViewBag.CurrentStoryStatus</p>-->
-            <h2>@ViewBag.CurrentStoryPrompt</h2>
+            <h2>@ViewBag.CurrentStoryTitle</h2>
             <p id="entrycontainer" align="center"></p>
            <!-- <p id="pendingentrycontainer">PENDING ENTRIES: <br></p>-->
         </div>
@@ -32,14 +32,15 @@
             </form>
         </div>
 
-        <div style="width:30%;display:inline-block;">
+        <div id="pending_container" style="display:inline-block;vertical-align:top;">
+        </div>
+
+        <div style ="padding-top:25px; visibility:hidden">
             <p>Vote For Pending Entry</p>
             <form action="@Url.Action("VoteForPendingEntry", "StoryView")" method="post">
-                Pending Entry Id:<input type="text" name="pendingEntryId"><br>
-                <input type="submit">
+                Pending Entry Id:<input type="text" name="pendingEntryId" id="pendingEntryIdBox"><br>
+                <input type="submit" id="pendingEntrySubmit">
             </form>
-        </div>
-        <div id="pending_container" style="display:inline-block;vertical-align:top;">
         </div>
 
         <hr />

@@ -3,12 +3,23 @@
 $(document).ready(function () {
     $(function () {
 
+        var isStoryClosed = function (input, Id) {
+            if (!input)
+                return 'Story Open! - <button onclick="goToStoryView('+Id+');">View</button>';
+            else
+                return "CLOSED";
+        }
+
         var printStory = function (i, data) {
-            $('#storycontainer').append("Story ID: "+data.Id);
-            $('#storycontainer').append(" Title: "+data.Title);
-            $('#storycontainer').append(" Prompt: " + data.Prompt);
-            $('#storycontainer').append(" Closed? : " + data.StoryClosed);
-            $('#storycontainer').append("<br>");
+            var x = i % 2;
+            var color = 'd';
+            if (x == 1) color = 'c';
+            $('#storycontainer').append('<div style="background-color:#' + color + color + color
+                + ';padding:0;margin:0;position:relative;text-align:left;padding-left:1cm;left:-6%;width:112%;border:0;border-radius:0;">'
+                + 'Title: ' + data.Title
+                + ' - ' + isStoryClosed(data.StoryClosed, data.Id)
+                + '<br>'
+                + "</div>");
 
         };
 
@@ -22,3 +33,8 @@ $(document).ready(function () {
         
     });
 });
+
+function goToStoryView(data) {
+    $('#storybox').val(data);
+    $('#submitButton').click();
+}

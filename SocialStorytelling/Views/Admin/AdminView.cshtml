@@ -95,22 +95,25 @@
             </div>
 
             <div class="col-md-8">
+                <p><br />Remove Entry</p>
+                <form action="@Url.Action("RemoveEntry", "Admin")" method="post">
+                    Id To Remove:<input type="text" name="idToRemove">
+                    <input type="submit">
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
                 <p><br />Promote Pending Entry</p>
                 <form action="@Url.Action("PromotePendingEntry", "Admin")" method="post">
                     Pending Entry Id:<input type="text" name="idToPromote"><br>
                     <input type="submit">
                 </form>
             </div>
-        </div>
 
-        <div class="row">
-           <div class ="col-md-4">
-                <p><br />Remove Entry</p>
-                <form action="@Url.Action("RemoveEntry", "Admin")" method="post">
-                    Id To Remove:<input type="text" name="idToRemove">
-                    <input type="submit">
-                </form>
-            </div >
             <div class="col-md-8">
                 <p><br />Remove Pending Entry</p>
                 <form action="@Url.Action("RemovePendingEntry", "Admin")" method="post">

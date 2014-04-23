@@ -8,20 +8,9 @@ $(document).ready(function () {
             var color = 'd';
             if (x == 1) color = 'c';
             $('#entrycontainer').append('<div style="background-color:#' + color + color + color
-                + ';padding:0;margin:0;position:relative;left:-6%;width:112%;border:0;border-radius:0;">'
+                + ';padding:0;margin:0;position:relative;text-align:left;padding-left:1cm;left:-6%;width:112%;border:0;border-radius:0;">'
                 + data.Text + '<br>'
                 + "</div>");
-
-            /*$('#entrycontainer').append("Id: " + data.IdNumber);
-            $('#entrycontainer').append("  ");
-            $('#entrycontainer').append("My Story ID:" + data.StoryId);
-            $('#entrycontainer').append("  ");
-            $('#entrycontainer').append("Text: " + data.Text);
-            $('#entrycontainer').append("  ");
-            $('#entrycontainer').append("Author: " + data.Author);
-            $('#entrycontainer').append(" ");
-            $('#entrycontainer').append("Submit: " + data.SubmissionDate);
-            $('#entrycontainer').append("<br>");*/
         }
 
         var printAStorysEntryList = function (data) {
@@ -40,6 +29,7 @@ $(document).ready(function () {
             $('#pending_container').append("<h4>Entry #"+ data.IdNumber + ':</h4>');
             $('#pending_container').append('<p>'+data.Text+'</p>');
             $('#pending_container').append('<p style="font-size:smaller;">Votes: ' + data.VotesCastForMe + '</p>');
+            $('#pending_container').append('<button onclick="voteForStory(' + data.IdNumber + ');">Vote</button>');
             $('#pending_container').append("</div>");
         }
 
@@ -55,3 +45,8 @@ $(document).ready(function () {
 
     });
 });
+
+function voteForStory(data) {
+    $('#pendingEntryIdBox').val(data);
+    $('#pendingEntrySubmit').click();
+}

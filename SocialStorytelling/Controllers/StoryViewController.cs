@@ -39,7 +39,7 @@ namespace SocialStorytelling.Controllers
             Response.Cookies.Add(mostRecentStory);
 
             ViewBag.CurrentStoryStatus = service.GetSpecificStoryStatus(storyIdToView);
-            ViewBag.CurrentStoryPrompt = service.GetSpecificStoryPrompt(storyIdToView);
+            ViewBag.CurrentStoryTitle = service.GetSpecificStoryTitle(storyIdToView);
 
             return View();
         }

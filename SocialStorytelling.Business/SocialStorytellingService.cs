@@ -107,6 +107,19 @@ namespace SocialStorytelling.Business
             return "Story not Found";
         }
 
+        public string GetSpecificStoryTitle(int storyId)
+        {
+            List<StoryData> stories = data.GetStories();
+            foreach (StoryData story in stories)
+            {
+                if (story.id == storyId)
+                {
+                    return story.Title;
+                }
+            }
+            return "Story not Found";
+        }
+
         public string GetSpecificStoryPrompt(int storyIdToView)
         {
             List<StoryData> stories = data.GetStories();
