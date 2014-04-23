@@ -5,9 +5,9 @@ $(document).ready(function () {
 
         var printStory = function (i, data) {
             $('#storycontainer').append("Story ID: " + data.Id);
-            $('#storycontainer').append(" Title: " + data.Title);
-            $('#storycontainer').append(" Prompt: " + data.Prompt);
-            $('#storycontainer').append(" Closed? : " + data.StoryClosed);
+            $('#storycontainer').append(" - Title: " + data.Title);
+            $('#storycontainer').append(" - Prompt: " + data.Prompt);
+            $('#storycontainer').append(" - Closed? : " + data.StoryClosed);
             $('#storycontainer').append("<br>");
 
         };
@@ -23,11 +23,9 @@ $(document).ready(function () {
         var printEntry = function (i, data) {
             $('#entrycontainer').append("Id: " + data.IdNumber);
             $('#entrycontainer').append("  ");
-            $('#entrycontainer').append("Text: " + data.Text);
+            $('#entrycontainer').append(" - Text: " + data.Text);
             $('#entrycontainer').append("  ");
-            $('#entrycontainer').append("Author: " + data.Author);
-            $('#entrycontainer').append("  ");
-            $('#entrycontainer').append("Submit: " + data.SubmissionDate);
+            $('#entrycontainer').append(" - Author: " + data.Author);
             $('#entrycontainer').append("<br>");
         }
 
@@ -42,15 +40,13 @@ $(document).ready(function () {
         var printPendingEntry = function (i, data) {
             $('#pendingentrycontainer').append("Id: " + data.IdNumber);
             $('#pendingentrycontainer').append("  ");
-            $('#pendingentrycontainer').append("My Story ID:" + data.StoryId);
+            $('#pendingentrycontainer').append(" - My Story ID:" + data.StoryId);
             $('#pendingentrycontainer').append("  ");
-            $('#pendingentrycontainer').append("Text: " + data.Text);
+            $('#pendingentrycontainer').append(" - Text: " + data.Text);
             $('#pendingentrycontainer').append("  ");
-            $('#pendingentrycontainer').append("Author: " + data.Author);
+            $('#pendingentrycontainer').append(" - Author: " + data.Author);
             $('#pendingentrycontainer').append(" ");
-            $('#pendingentrycontainer').append("Submit: " + data.SubmissionDate);
-            $('#pendingentrycontainer').append(" ");
-            $('#pendingentrycontainer').append("Votes: " + data.VotesCastForMe);
+            $('#pendingentrycontainer').append(" - Votes: " + data.VotesCastForMe);
             $('#pendingentrycontainer').append("<br>");
         }
 

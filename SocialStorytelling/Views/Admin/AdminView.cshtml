@@ -17,10 +17,33 @@
 <body>
 
     <div class="container body-content">
-        <div class="jumbotron">
+        <div style="background-color:lightgray">
             <p id="storycontainer">STORIES: <br></p>
             <p id="entrycontainer">ENTRIES: <br></p>
             <p id="pendingentrycontainer">PENDING ENTRIES: <br></p>
+        </div>
+
+        <div>
+            <p>
+                <br /> ----------------------ADMIN COMMANDS FOR STORY/TWITTER INTEGRATION---------------------------
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <p><br />Check For New Pending Entries</p>
+                <form action="@Url.Action("CheckForNewEntriesOnTwitter", "Admin")" method="get">
+                    Story Id:<input type="text" name="idToCheck">
+                    <input type="submit">
+                </form>
+            </div>
+            <div class="col-md-6">
+                <p><br />Promotet Highest Pending Entry and Tweet</p>
+                <form action="@Url.Action("PromoteHighestPendingEntryAndTweet", "Admin")" method="post">
+                    Story Id:<input type="text" name="idToPromote">
+                    <input type="submit">
+                </form>
+            </div>
         </div>
 
         <div>
@@ -54,30 +77,6 @@
             </div>
         </div>
 
-
-        <div>
-            <p>
-                <br /> ----------------------ADMIN COMMANDS FOR STORY/TWITTER INTEGRATION---------------------------
-            </p>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <p><br />Check For New Pending Entries</p>
-                <form action="@Url.Action("CheckForNewEntriesOnTwitter", "Admin")" method="get">
-                    Story Id:<input type="text" name="idToCheck">
-                    <input type="submit">
-                </form>
-            </div>
-            <div class="col-md-6">
-                <p><br />Promotet Highest Pending Entry and Tweet</p>
-                <form action="@Url.Action("PromoteHighestPendingEntryAndTweet", "Admin")" method="post">
-                    Story Id:<input type="text" name="idToPromote">
-                    <input type="submit">
-                </form>
-            </div>
-        </div>
-        
         <div>
             <p>
                 <br /> ----------------------ADMIN COMMANDS FOR STORY PAGE BELOW---------------------------
